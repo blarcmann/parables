@@ -28,7 +28,7 @@ import { LeadsService } from '../../../../core/leads';
 import { ContactsService } from '../../../../core/contacts';
 import { CampaignsService } from '../../../../core/campaigns';
 import { MeetingsService } from '../../../../core/meetings';
-import { ProjectsService } from '../../../../core/projects';
+import { ParablesService } from '../../../../core/parables';
 import { StaffEditComponent } from './staff-edit/staff-edit.component';
 import { StaffComponent } from './staff/staff.component';
 import { PasswordEditComponent } from './password/password-edit.component';
@@ -214,7 +214,7 @@ const routes: Routes = [
 			}
 		},
 		UserService, RolesService, ClaimsService, LeadsService,
-		ContactsService, CampaignsService, MeetingsService, ProjectsService
+		ContactsService, CampaignsService, MeetingsService, ParablesService
 	],
 	entryComponents: [
 		ActionNotificationComponent,

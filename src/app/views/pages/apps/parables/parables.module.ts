@@ -12,13 +12,10 @@ import { PartialsModule } from '../../../partials/partials.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Components
-import { ProjectsComponent } from './projects.component';
-// Leads Actions
-import { ProjectsListComponent } from './projects-list/projects-list.component';
-import { ProjectEditComponent } from './project-edit/project-edit.component';
-import { ProjectComponent } from './project/project.component';
-import { AddProjectUserComponent } from './add-project-user/add-project-user.component';
-import { AddProjectVendorComponent } from './add-project-vendor/add-project-vendor.component';
+import { ParablesComponent } from './parables.component';
+import { AllParablesComponent } from './parables/parables.component';
+import { ParableEditComponent } from './edit-parable/parable-edit.component';
+import { ParableComponent } from './parable/parable.component';
 
 // Core => utils
 import { HttpUtilsService,
@@ -27,7 +24,7 @@ import { HttpUtilsService,
 	LayoutUtilsService
 } from '../../../../core/_base/crud';
 
-import { ProjectsService } from '../../../../core/projects';
+import { ParablesService } from '../../../../core/parables';
 import {
 	ActionNotificationComponent,
 	DeleteEntityDialogComponent,
@@ -63,36 +60,28 @@ import {
 const routes: Routes = [
 	{
 		path: '',
-		component: ProjectsComponent,
+		component: ParablesComponent,
 		children: [
 			{
 				path: '',
-				redirectTo: 'projects',
+				redirectTo: 'parables',
 				pathMatch: 'full'
 			},
 			{
-				path: 'projects',
-				component: ProjectsListComponent,
+				path: 'parables',
+				component: AllParablesComponent,
 			},
 			{
 				path: 'manage',
-				component: ProjectEditComponent
+				component: ParableEditComponent
 			},
 			{
 				path: 'manage/:id',
-				component: ProjectEditComponent
+				component: ParableEditComponent
 			},
 			{
-				path: 'project/:id',
-				component: ProjectComponent,
-			},
-			{
-				path: 'project/:id/add-user',
-				component: AddProjectUserComponent
-			},
-			{
-				path: 'project/:id/add-vendor',
-				component: AddProjectVendorComponent
+				path: 'parable/:id',
+				component: ParableComponent
 			}
 		]
 	}
@@ -149,7 +138,7 @@ const routes: Routes = [
 				width: '900px'
 			}
 		},
-		ProjectsService
+		ParablesService
 	],
 	entryComponents: [
 		ActionNotificationComponent,
@@ -158,12 +147,10 @@ const routes: Routes = [
 		UpdateStatusDialogComponent,
 	],
 	declarations: [
-		ProjectsComponent,
-		ProjectsListComponent,
-		ProjectEditComponent,
-		ProjectComponent,
-		AddProjectUserComponent,
-		AddProjectVendorComponent
+		ParablesComponent,
+		AllParablesComponent,
+		ParableEditComponent,
+		ParableComponent
 	]
 })
-export class ProjectsModule { }
+export class ParablesModule { }

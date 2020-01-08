@@ -1,0 +1,1 @@
+export { ParablesService } from './_services';

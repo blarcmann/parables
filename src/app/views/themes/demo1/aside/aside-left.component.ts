@@ -66,12 +66,8 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit() {
-		if (this.loginData) {
-			this.setBackground = this.loginData['color'];
-		} else {
-			this.setBackground = '#1a1a27';
-		}
-		this.getOrganizationDetails();
+		this.setBackground = '#2c2e3e';
+		// this.getOrganizationDetails();
 		this.currentRouteUrl = this.router.url.split(/[?#]/)[0];
 		this.router.events
 			.pipe(filter(event => event instanceof NavigationEnd))
@@ -90,23 +86,23 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	getOrganizationDetails() {
-		this.organizationsService.getOrganization().subscribe(
-			singleOrganization => {
-				this.organizationDetails = singleOrganization['data'];
-				console.log('org details sssssidemenu aside', this.organizationDetails);
-				if (this.organizationDetails && this.organizationDetails.color) {
-					this.setBackground = this.organizationDetails.color;
-				}
-				if (this.organizationDetails && this.organizationDetails.logo) {
-					localStorage.setItem('siteMeta', JSON.stringify(this.organizationDetails));
-				}
-			},
-			error => {
-				console.log('error occured', error);
-			}
-		);
-	}
+	// getOrganizationDetails() {
+	// 	this.organizationsService.getOrganization().subscribe(
+	// 		singleOrganization => {
+	// 			this.organizationDetails = singleOrganization['data'];
+	// 			console.log('org details sssssidemenu aside', this.organizationDetails);
+	// 			if (this.organizationDetails && this.organizationDetails.color) {
+	// 				this.setBackground = this.organizationDetails.color;
+	// 			}
+	// 			if (this.organizationDetails && this.organizationDetails.logo) {
+	// 				localStorage.setItem('siteMeta', JSON.stringify(this.organizationDetails));
+	// 			}
+	// 		},
+	// 		error => {
+	// 			console.log('error occured', error);
+	// 		}
+	// 	);
+	// }
 
 	isMenuItemIsActive(item): boolean {
 		if (item.submenu) {

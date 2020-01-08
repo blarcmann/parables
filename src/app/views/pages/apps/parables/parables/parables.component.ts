@@ -2,19 +2,19 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 // Services and Models
-import { ProjectsService } from '../../../../../core/projects';
+import { ParablesService } from '../../../../../core/parables';
 
 
 @Component({
 	// tslint:disable-next-line:component-selector
-	selector: 'kt-logs',
-	templateUrl: './logs.component.html',
-	styleUrls: ['./logs.component.scss']
+	selector: 'kt-parables',
+	templateUrl: './parables.component.html',
+	styleUrls: ['./parables.component.scss']
 })
-export class AllLogsComponent implements OnInit, OnDestroy {
+export class AllParablesComponent implements OnInit, OnDestroy {
 	loading$: Observable<boolean>;
 	loadingSubject = new BehaviorSubject<boolean>(true);
-	logs: any[] = [];
+	parables: any[] = [];
 	pageIndex = 0;
 	limit = 20;
 	resultsLength: number = 0;
@@ -22,18 +22,18 @@ export class AllLogsComponent implements OnInit, OnDestroy {
 	disableNext: boolean;
 	editedProject;
 	constructor(
-		private projectsService: ProjectsService,) { }
+		private parablesService: ParablesService,) { }
 
 	ngOnInit() {
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
 		let skip = this.pageIndex * this.limit;
-		this.getLogs(skip, this.limit);
+		this.getParables(skip, this.limit);
 	}
 
-	getLogsCount() {
+	getParablesCount() {
 		this.loadingSubject.next(true);
-		this.projectsService.getLogsCount().subscribe(
+		this.parablesService.getParablesCount().subscribe(
 			countResult => {
 				this.resultsLength = countResult['data'];
 				if (this.pageIndex > 0) {
@@ -43,12 +43,12 @@ export class AllLogsComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	getLogs(skip, limit) {
+	getParables(skip, limit) {
 		this.loadingSubject.next(true);
-		this.projectsService.getLogs(skip, limit).subscribe(
+		this.parablesService.getParables(skip, limit).subscribe(
 			responseData => {
-				this.logs = responseData['data'];
-				console.log('looooooooogs', this.logs);
+				this.parables = responseData['data'];
+				console.log('looooooooogs', this.parables);
 				this.loadingSubject.next(false);
 			},
 			error => {
@@ -75,16 +75,16 @@ export class AllLogsComponent implements OnInit, OnDestroy {
 	getNext() {
 		this.pageIndex = this.pageIndex + 1;
 		let skip = this.pageIndex * this.limit;
-		this.getLogs(skip, this.limit);
-		this.getLogsCount();
+		this.getParables(skip, this.limit);
+		this.getParablesCount();
 		this.itemNav();
 	}
 
 	getPrev() {
 		this.pageIndex = this.pageIndex - 1;
 		let skip = this.pageIndex * this.limit;
-		this.getLogs(skip, this.limit);
-		this.getLogsCount();
+		this.getParables(skip, this.limit);
+		this.getParablesCount();
 		this.itemNav();
 	}
 
