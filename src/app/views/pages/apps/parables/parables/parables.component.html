@@ -25,17 +25,16 @@
 							<td>{{(parable.title.length > 43) ? (parable.title | slice:0:33)+'...' : (parable.title)}}</td>
 							<td>{{(parable.translation.length > 43) ? (parable.translation | slice:0:33)+'...' : (parable.translation)}}
 							</td>
-							<td class="status">
+							<td class="status" *ngIf="parable.file">
 								<span [ngClass]="{
 									sentMOUProposal: !parable.file.Location,
 									convertedToContact: parable.file.Location
 								}">{{parable.file.Location ? 'True' : 'not available'}}</span>
 							</td>
-							<td class="status">
-								<span [ngClass]="{
-									sentMOUProposal: !parable.sound,
-									convertedToContact: parable.sound
-								}">{{parable.sound ? 'True' : 'not available'}}</span>
+							<td class="status" *ngIf="parable.sound && parable.sound.Location"><a href="{{parable.sound.Location}}" target="_blank">{{(parable.sound.Location.length > 43) ? (parable.sound.Location | slice:0:43)+'...' : (parable.sound.Location)}}</a>
+							</td>
+							<td class="status" *ngIf="!parable.sound">
+								<span class="sentMOUProposal">not available</span>
 							</td>
 							<td>
 								<a routerLink="/para/parables/parable/{{parable._id}}" class="view">View</a>

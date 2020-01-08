@@ -18,8 +18,6 @@ export class QuizesListComponent implements OnInit, OnDestroy {
 	resultsLength: number = 0;
 	disablePrev = true;
 	disableNext: boolean;
-	editedStatus;
-	editedQuiz;
 	constructor(
 		private quizesService: QuizesService) { }
 

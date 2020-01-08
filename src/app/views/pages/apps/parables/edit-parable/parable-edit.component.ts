@@ -136,7 +136,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 			payload.append('image', this.fSelected, this.fSelected.name);
 		}
 		if (this.fAudio) {
-			payload.append('audio', this.fAudio, this.fAudio.name);
+			payload.append('sound', this.fAudio, this.fAudio.name);
 		}
 		this.parablesService.updateParable(payload, this.idParams).subscribe(
 			data => {
@@ -164,7 +164,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 			payload.append('image', this.fSelected, this.fSelected.name);
 		}
 		if (this.fAudio) {
-			payload.append('audio', this.fAudio, this.fAudio.name);
+			payload.append('sound', this.fAudio, this.fAudio.name);
 		}
 		this.parablesService.createParable(payload).subscribe(
 			data => {

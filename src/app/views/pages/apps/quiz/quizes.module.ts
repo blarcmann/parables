@@ -72,7 +72,7 @@ const routes: Routes = [
 				pathMatch: 'full'
 			},
 			{
-				path: 'quiz',
+				path: 'quiz/:id',
 				component: QuizComponent,
 			},
 			{

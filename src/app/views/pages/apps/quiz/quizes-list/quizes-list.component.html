@@ -1,10 +1,10 @@
 <kt-portlet>
-	<kt-portlet-header title="Organizations" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+	<kt-portlet-header title="Quiz list" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
 		<ng-container ktPortletTools>
-			<a routerLink="/strada/organizations/manage" class="primary-button kt-margin-r-10" matTooltip="Add new organization">
+			<!-- <a routerLink="/para/quizes/manage" class="primary-button kt-margin-r-10" matTooltip="Add new organization">
 				<i class="la la-plus"></i>
-				<span class="kt-hidden-mobile">New Organization</span>
-			</a>
+				<span class="kt-hidden-mobile"></span>
+			</a> -->
 		</ng-container>
 	</kt-portlet-header>
 	<kt-portlet-body>
@@ -13,21 +13,21 @@
 				<table class="table-view">
 					<thead>
 						<tr>
-							<th>Organiation's name</th>
-							<th>RC number</th>
-							<th>Email</th>
-							<th>Website</th>
+							<th>Username</th>
+							<th>Score</th>
+							<th>Start</th>
+							<th>end</th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr className="each-row" *ngFor="let organization of quizes">
-							<td>{{ organization.name | titlecase }}</td>
-							<td>{{ organization.rc }}</td>
-							<td>{{ organization.email }}</td>
-							<td>{{ organization.url }}</td>
+						<tr className="each-row" *ngFor="let quiz of quizes">
+							<td>{{ quiz.name | titlecase }}</td>
+							<td>{{ quiz.score }}</td>
+							<td>{{ quiz.start | date: 'fullDate' }}</td>
+							<td>{{ quiz.end | date: 'fullDate' }}</td>
 							<td>
-								<a routerLink="/strada/organizations/organization/{{organization._id}}" class="view">View</a>
+								<a routerLink="/para/quizes/quiz/{{quiz._id}}" class="view">View</a>
 							</td>
 						</tr>
 					</tbody>
