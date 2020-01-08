@@ -1,0 +1,50 @@
+<kt-portlet>
+	<kt-portlet-header [title]="pageTitle|titlecase" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+		<ng-container ktPortletTools>
+			<div class="details-action edit text-center" routerLink="/cdash/users/manage/{{ userId }}">
+				<img src="./assets/media/icons/details-edit.svg" alt="">
+				<span>Edit</span>
+			</div>
+			<div class="details-action approve text-center" routerLink="/cdash/users/managepassword/{{ userId }}">
+				<img src="./assets/media/icons/details-approve.svg" alt="">
+				<span>Change password</span>
+			</div>
+		</ng-container>
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<div class="goback" (click)="goBack()">
+			<img src="./assets/media/icons/backBtn.svg" alt="">
+			<span>Back</span>
+		</div>
+		<div class="contact-body" *ngIf="userDetails">
+			<div class="item-details maxed pt-0">
+				<table class="ml-5 details-table">
+					<tr class="each-data" *ngIf="userDetails.name">
+						<td class="label">Name</td>
+						<td class="value">{{ userDetails.name|titlecase }}</td>
+					</tr>
+
+					<tr class="each-data" *ngIf="userDetails.username">
+						<td class="label">Email</td>
+						<td class="value">
+							<a href="mailto:{{ userDetails.username }}">{{	userDetails.username }}</a>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="userDetails.name">
+						<td class="label">User type</td>
+						<td class="value">{{ userDetails.type | titlecase }}</td>
+					</tr>
+					<tr class="each-data" *ngIf="userDetails.role">
+						<td class="label">Role</td>
+						<td class="value">{{ roleName | titlecase }}</td>
+					</tr>
+					<tr class="each-data" *ngIf="userDetails.role">
+						<td class="label">Permissions</td>
+						<td class="value"><span class="spacings" *ngFor="let permisson of rolePerm">{{replaceUnderscore(permisson)}}, </span></td>
+					</tr>
+				</table>
+			</div>
+			<div *ngIf="!userDetails" class="mt-5 please-data text-center">Please retry...</div>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

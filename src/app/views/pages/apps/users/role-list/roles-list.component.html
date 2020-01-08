@@ -1,0 +1,59 @@
+<kt-portlet>
+	<kt-portlet-body>
+		<div class="list-ccover">
+			<div class="menu">
+				<div class='item active'>
+					<div class="selected">Roles</div>
+					<div class="active"></div>
+				</div>
+			</div>
+			<div class='intro-text slide-in'>
+				Roles help to define how information is shared among users based on the organisations role hierarchy.
+			</div>
+			<!-- <div class="goback mt-3 mb-3" (click)="goBack()">
+				<img src="./assets/media/icons/backBtn.svg" alt="">
+				<span>Back</span>
+			</div> -->
+			<div class="roles-table">
+				<div class="headers">
+					<div class="details-action edit text-center" routerLink="/cdash/users/roles/add">
+						<img src="./assets/media/icons/details-edit.svg" alt="">
+						<span>Add role</span>
+					</div>
+				</div>
+				<div class="role-body">
+					<div class="claim-body">
+						<table class="table-view">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Permission</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr className="each-row" *ngFor="let role of roles">
+									<td>{{role.name}}</td>
+									<td class="uppercase-spacing"><span class="spacings" *ngFor="let permisson of role.permissions">{{replaceUnderscore(permisson)}}, </span></td>
+									<td class="table-menu">
+										<a (click)="onDelete(role._id)" class="view delete">Delete</a>
+										<a routerLink="/cdash/users/roles/add/{{role._id}}" class="view edit">Edit</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="my-pagination mt-5 mb-4">
+					<div class="pg">Page: <b>{{pageIndex + 1}}</b></div>
+					<div class="btn-grp">
+						<button mat-raised-button (click)="getPrev()" color="primary"
+							[disabled]="disablePrev">Previous</button>
+						<button mat-raised-button (click)="getNext()" color="primary"
+							[disabled]="disableNext">Next</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

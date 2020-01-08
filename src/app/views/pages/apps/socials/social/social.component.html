@@ -1,0 +1,69 @@
+<kt-portlet>
+	<kt-portlet-header title="Social media details" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+		<ng-container ktPortletTools>
+			<div class="details-action delete text-center" (click)="onDelete()">
+				<img src="./assets/media/icons/details-delete.svg" alt="">
+				<span>Delete account</span>
+			</div>
+		</ng-container>
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<div class="goback" (click)="goBack()">
+			<img src="./assets/media/icons/backBtn.svg" alt="">
+			<span>Back</span>
+		</div>
+		<div class="contact-body" *ngIf="socialDetails">
+			<div class="item-details p-3 pt-0">
+				<table class="ml-5 details-table">
+					<tr class="each-data" *ngIf="socialDetails.name">
+						<td class="label">Name</td>
+						<td class="value">{{ socialDetails.name }}</td>
+					</tr>
+					<tr class="each-data" *ngIf="socialDetails.email">
+						<td class="label">Email address</td>
+						<td class="value status">
+							<span class="plain">{{socialDetails.email}}</span>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="socialDetails.username">
+						<td class="label">Username</td>
+						<td class="value">
+							<span class="plain">{{socialDetails.username}}</span>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="socialDetails.screen_name">
+						<td class="label">Screen name</td>
+						<td class="value">
+							<span class="plain">{{socialDetails.screen_name}}</span>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="socialDetails.location">
+						<td class="label">Location</td>
+						<td class="value">
+							<span class="plain">{{socialDetails.location}}</span>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="socialDetails.followers_count">
+						<td class="label">Number of followers</td>
+						<td class="value">
+							<span class="plain">{{socialDetails.followers_count}}</span>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="socialDetails.statuses_count">
+						<td class="label">Number of tweets</td>
+						<td class="value">
+							<span class="plain">{{socialDetails.statuses_count}}</span>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="socialDetails.favourites_count">
+						<td class="label">Number of likes</td>
+						<td class="value">
+							<span class="plain">{{socialDetails.favourites_count}}</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div *ngIf="!socialDetails" class="mt-5 please-data text-center">Please sign in to access details...</div>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

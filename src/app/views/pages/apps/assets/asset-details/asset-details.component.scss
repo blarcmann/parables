@@ -1,0 +1,39 @@
+.images.smallz {
+	img {
+		width: 120px;
+	}
+}
+.staffs {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	font-weight: 600;
+	.staff {
+		color: #5d78ff;
+		display: block;
+		margin:  0.5rem 1rem;
+		cursor: pointer;
+	}
+}
+
+.menu {
+	display: flex;
+	justify-content: flex-start;
+	.item {
+		color: #1B1B28;
+		font-weight: 500;
+		margin-right: 4rem;
+		&:hover {
+			cursor: pointer;
+		}
+		&.active {
+			.active {
+				width: 0.75rem;
+				height: 0.75rem;
+				background-color: #5D78FF;
+				border-radius: 50%;
+				margin: auto;
+			}
+		}
+	}
+}

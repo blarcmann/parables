@@ -1,0 +1,91 @@
+<div class="form-container with-bg">
+	<div class="auth-logo">Parables</div>
+	<div class="kt-login__body">
+		<!--begin::Signin-->
+		<div class="kt-login__form">
+			<div class="kt-login__title">
+				<h4>Register</h4>
+			</div>
+
+			<kt-auth-notice></kt-auth-notice>
+
+			<form class="kt-login__form kt-form" [formGroup]="registerForm" autocomplete="off">
+				<div class="form-group">
+					<div class="form-item auth">
+						<input type="text" placeholder="Full name" name="fullname" autocomplete="off" id="fullname" formControlName="fullname" />
+						<div *ngIf="isControlHasError('fullname','required')">
+							<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+						</div>
+						<div *ngIf="isControlHasError('fullname','minLength')">
+							<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+						</div>
+						<div *ngIf="isControlHasError('fullname','maxLength')">
+							<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-item auth">
+						<input type="email" placeholder="Email" name="email" id="email" formControlName="email" autocomplete="off"/>
+						<div *ngIf="isControlHasError('email','required')">
+							<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+						</div>
+						<div *ngIf="isControlHasError('email','email')">
+							<strong>{{ 'AUTH.VALIDATION.INVALID_FIELD' | translate }}</strong>
+						</div>
+						<div *ngIf="isControlHasError('email','minLength')">
+							<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+						</div>
+						<div *ngIf="isControlHasError('email','maxLength')">
+							<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 320</strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-item auth">
+						<input type="password" placeholder="Password" name="password" id="password" formControlName="password" autocomplete="off"/>
+						<div *ngIf="isControlHasError('password','required')">
+							<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+						</div>
+						<div *ngIf="isControlHasError('password','minLength')">
+							<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+						</div>
+						<div *ngIf="isControlHasError('password','maxLength')">
+							<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-item auth">
+						<input type="password" placeholder="Confirm Password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" autocomplete="off"/>
+						<div *ngIf="isControlHasError('confirmPassword','required')">
+							<strong>{{ 'AUTH.VALIDATION.REQUIRED_FIELD' | translate }}</strong>
+						</div>
+						<div *ngIf="isControlHasError('confirmPassword','minLength')">
+							<strong>{{ 'AUTH.VALIDATION.MIN_LENGTH_FIELD' | translate }} 3</strong>
+						</div>
+						<div *ngIf="isControlHasError('confirmPassword','maxLength')">
+							<strong>{{ 'AUTH.VALIDATION.MAX_LENGTH_FIELD' | translate }} 100</strong>
+						</div>
+						<div *ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors.ConfirmPassword">
+							<strong>Passsword and Confirm -password didn't match.</strong>
+						</div>
+					</div>
+				</div>
+				<div class="form-group mt-4 mx-auto">
+					<mat-checkbox name="agree" formControlName="agree">
+						I agree the <a href="javascript:;">terms & conditions</a>
+					</mat-checkbox>
+				</div>
+
+				<!--begin::Action-->
+				<div class="kt-login__actions central-btn">
+					<button (click)="submit()" id="kt_login_signin_submit"
+						class="btn btn-primary btn-elevate kt-login__btn-primary"
+						[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}">Register</button>
+				</div>
+				<!--end::Action-->
+			</form>
+		</div>
+	</div>
+</div>

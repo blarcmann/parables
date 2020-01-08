@@ -1,0 +1,42 @@
+<kt-portlet>
+	<kt-portlet-header title="Total expenses/ Turnover ratio" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+		<ng-container ktPortletTools>
+			<div class="details-action options text-center" routerLink="/cdash/computations/expenses-turnover/chart">
+				<span>See chart details</span>
+			</div>
+			<div class="details-action options text-center" [matMenuTriggerFor]="menu">
+				<span>{{selectedName}}</span>
+			</div>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item (click)="generateTurnover(asset.name, asset._id)"
+					*ngFor="let asset of allAssets">
+					{{ asset.name }}
+				</button>
+			</mat-menu>
+		</ng-container>
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<div class="stage-history">
+			<table class="table-view" *ngIf="expTurnovers">
+				<thead>
+					<tr>
+						<th>Year</th> 
+						<th>Turnover</th>
+						<th>Expenses({{passedCurrency}})</th>
+						<th>Ratio</th>
+						<!-- <th></th> -->
+					</tr>
+				</thead>
+				<tbody *ngIf="expTurnovers">
+					<tr className="each-row" *ngFor="let year of years; let i = index;">
+						<td>{{year}}</td>
+						<td>{{ (expTurnovers.turnovers[i].amount ? expTurnovers.turnovers[i].amount : 0) | currency: passedCurrency}}</td>
+						<td>{{ (expTurnovers.expenses[i].amount ? expTurnovers.expenses[i].amount : 0) | currency: passedCurrency}}</td>
+						<td>{{expTurnovers.ratio[i].ratio ? expTurnovers.ratio[i].ratio : 'n/a'}}</td>
+						<!-- <td><a routerLink="/cdash/computations/expenses-turnover/ratio-chart" class="view">View ratio chart</a></td> -->
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

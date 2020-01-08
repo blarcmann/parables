@@ -1,0 +1,57 @@
+:host {
+	::ng-deep {
+		ngb-tabset > .nav-tabs {
+			display: none;
+		}
+	}
+}
+
+.home-card {
+	height: 118px;
+	width: 95%;
+	margin: 1rem auto;
+	display: flex;
+	background-color: #ffffff;
+	color: #333;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+	&:hover {
+		box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12), 0 2px 1px -4px rgba(49, 49, 49, 0.2);
+		cursor: pointer;
+	}
+	.card-image {
+		width: 84px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		&.one {background-color: #F44336;}
+		&.two {background-color: #ff9800;}
+		&.three {background-color: #30cc7b;}
+		&.four {background-color: #2196F3;}
+		img {
+			display: block;
+			width: 35px;
+		}
+	}
+	.card-data {
+		width: 80%;
+		.stat {
+			padding: 20px;
+			font-size: 1.45rem;
+			font-weight: 500;
+		}
+		.title {
+			border-top: 1px solid rgba(160,160,160,0.2);
+			font-size: 0.875rem;
+			font-weight: 600;
+			padding: 20px;
+		}
+	}
+}
+
+// .player-title {
+//     position: absolute;
+//     left: 0; right: 0;
+//     top: calc(50% + 55px);
+//     text-align: center;
+//     color: #999;
+// }

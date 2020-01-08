@@ -1,0 +1,44 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xl-12">
+			<div class="mt-4 mb-5 profile-data">
+				<div class="biz-title text-center">Account details</div>
+				<div class="biz-underline mx-auto mb-5"></div>
+				<div class="profile-card" *ngIf="userDetails">
+					<div class="profile">
+						<img src="./assets/media/icons/user.svg" alt="">
+						<div class="name" *ngIf="userDetails.name">{{ userDetails.name }}</div>
+						<div class="address" *ngIf="userDetails.head && !userDetails.admin">H.O.D</div>
+						<div class="address" *ngIf="userDetails.admin">Admin</div>
+					</div>
+					<div class="details">
+						<div class="each-details" *ngIf="userDetails.username">
+							<img src="./assets/media/icons/email.svg" alt="">
+							<span>{{userDetails.username}}</span>
+						</div>
+						<div class="each-details" *ngIf="userDetails.type">
+							<img src="./assets/media/icons/email.svg" alt="">
+							<span>{{userDetails.type}}</span>
+						</div>
+						<div class="each-details">
+							<img src="./assets/media/icons/email.svg" alt="">
+							<span>{{companyDetails.name}}</span>
+						</div>
+						<!-- <div class="each-details">
+							<img src="./assets/media/icons/email.svg" alt="">
+							<span>{{userDetails.dob | date: 'fullDate'}}</span>
+						</div> -->
+					</div>
+				</div>
+			</div>
+
+
+			<div class="profile-btn">
+				<div class="details-action edit text-center" routerLink="/cdash/users/profile-edit">
+					<img src="./assets/media/icons/details-edit.svg" alt="">
+					<span>Edit</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
