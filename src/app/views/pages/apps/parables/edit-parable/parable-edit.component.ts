@@ -34,7 +34,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	loading$: Observable<boolean>;
 	loadingSubject = new BehaviorSubject<boolean>(true);
 	oldparable: any;
-	parableForm: FormGroup;
+	parablesForm: FormGroup;
 	hasFormErrors: boolean = false;
 	headerMargin: number;
 	selectedTab: number = 0;
@@ -43,6 +43,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	showModal: boolean = false;
 	fSelected;
 	fAudio;
+	fAudioName;
 	fileName;
 	formError = 'Oops! Change a few things up and try submitting again.';
 	constructor(
@@ -66,6 +67,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 			const style = getComputedStyle(document.getElementById('kt_header'));
 			this.headerMargin = parseInt(style.height, 0);
 		};
+		this.loadingSubject.next(false);
 	}
 
 	getParableDetails(id) {
@@ -79,14 +81,14 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	}
 
 	emptyParableForm() {
-		this.parableForm = this.fb.group({
+		this.parablesForm = this.fb.group({
 			title: ['', Validators.required],
 			translation: ['', Validators.required],
 		});
 	}
 
 	initparableForm(parable: any = {}) {
-		this.parableForm = this.fb.group({
+		this.parablesForm = this.fb.group({
 			title: [parable.title || '', Validators.required],
 			translation: [parable.translation || '', Validators.required]
 		});
@@ -104,9 +106,9 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 
 	onSubmit() {
 		this.hasFormErrors = false;
-		const controls = this.parableForm.controls;
+		const controls = this.parablesForm.controls;
 		this.loadingSubject.next(true);
-		if (this.parableForm.invalid) {
+		if (this.parablesForm.invalid) {
 			this.loadingSubject.next(false);
 			Object.keys(controls).forEach(controlName =>
 				controls[controlName].markAsTouched()
@@ -116,7 +118,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 			return;
 		}
 		if (this.idParams) {
-			let editedParable = this.parableForm.value;
+			let editedParable = this.parablesForm.value;
 			console.log('parable to send', editedParable);
 			this.updateParable();
 		} else {
@@ -128,10 +130,13 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	updateParable() {
 		this.loadingSubject.next(true);
 		let payload = new FormData();
-		payload.append('title', this.parableForm.get('title').value);
-		payload.append('translation', this.parableForm.get('translation').value);
+		payload.append('title', this.parablesForm.get('title').value);
+		payload.append('translation', this.parablesForm.get('translation').value);
 		if (this.fSelected) {
-			payload.append('logo', this.fSelected, this.fSelected.name);
+			payload.append('image', this.fSelected, this.fSelected.name);
+		}
+		if (this.fAudio) {
+			payload.append('audio', this.fAudio, this.fAudio.name);
 		}
 		this.parablesService.updateParable(payload, this.idParams).subscribe(
 			data => {
@@ -153,8 +158,8 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	addParable() {
 		this.loadingSubject.next(true);
 		let payload = new FormData();
-		payload.append('title', this.parableForm.get('title').value);
-		payload.append('translation', this.parableForm.get('translation').value);
+		payload.append('title', this.parablesForm.get('title').value);
+		payload.append('translation', this.parablesForm.get('translation').value);
 		if (this.fSelected) {
 			payload.append('image', this.fSelected, this.fSelected.name);
 		}
@@ -167,7 +172,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 				console.log('success reponse', data);
 				const message = `Success`;
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-				this.router.navigate(['/cdash/parable/parables']);
+				this.router.navigate(['/para/parables']);
 			}, error => {
 				this.loadingSubject.next(false);
 				console.log('Error response', error);
@@ -181,9 +186,9 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 		this.parable = Object.assign({}, this.oldparable);
 		this.emptyParableForm();
 		this.hasFormErrors = false;
-		this.parableForm.markAsPristine();
-		this.parableForm.markAsUntouched();
-		this.parableForm.updateValueAndValidity();
+		this.parablesForm.markAsPristine();
+		this.parablesForm.markAsUntouched();
+		this.parablesForm.updateValueAndValidity();
 	}
 
 	onFileChange(event, type) {
@@ -194,6 +199,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 			}
 			if (type === 'audio') {
 				this.fAudio = event.target.files[0];
+				this.fAudioName = event.target.files[0].name;
 			}
 		}
 	}

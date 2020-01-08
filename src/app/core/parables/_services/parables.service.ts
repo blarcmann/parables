@@ -73,7 +73,7 @@ export class ParablesService {
 	// delete a parable
 	deleteParable(parableId: string): Observable<any> {
 		const userToken = localStorage.getItem('userToken');
-		return this.http.delete<any>(`${BASE_URL}/api/parable?parable_id=${parableId}`, {
+		return this.http.delete<any>(`${BASE_URL}/parable/${parableId}`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
 			}
