@@ -16,7 +16,6 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LayoutConfigService, LayoutRefService } from '../../../../core/_base/layout';
 // HTML Class Service
 import { HtmlClassService } from '../html-class.service';
-import { OrganizationsService } from '../../../../core/organizations';
 
 
 @Component({
@@ -44,7 +43,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 		private layoutRefService: LayoutRefService,
 		private layoutConfigService: LayoutConfigService,
 		public loader: LoadingBarService,
-		private organizationsService: OrganizationsService,
 		public htmlClassService: HtmlClassService
 	) {
 		// page progress bar percentage
@@ -74,24 +72,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 	 * On init
 	 */
 	ngOnInit(): void {
-		setTimeout(() => {
-			const organizationId = localStorage.getItem('organizationId');
-			this.organizationsService.getOrganization().subscribe(
-				singleOrganization => {
-					this.organizationDetails = singleOrganization['success'];
-					console.log('org details sssssidemenu aside', this.organizationDetails);
-					if (this.organizationDetails && this.organizationDetails.color) {
-						localStorage.setItem('orgBg', this.organizationDetails.color);
-					}
-					if (this.organizationDetails && this.organizationDetails.image) {
-						localStorage.setItem('orgBg', this.organizationDetails.image);
-					}
-				},
-				error => {
-					console.log('error occured', error);
-				}
-			);
-		}, 10);
 		const config = this.layoutConfigService.getConfig();
 
 		// get menu header display option

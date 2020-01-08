@@ -18,7 +18,7 @@ import { AssetsModule } from './apps/assets/assets.module';
 import { ProfileModule } from './apps/profile/profile.module';
 import { UsersModule } from './apps/users/users.module';
 import { SalesModule } from './apps/sales/sales.module';
-import { OrganizationsModule } from './apps/organizations/organizations.module';
+import { QuizesModule } from './apps/quiz/quizes.module';
 import { ComputationsModule } from './apps/computations/computations.module';
 import { ParablesModule } from './apps/parables/parables.module';
 import { AdvertsModule } from './apps/adverts/adverts.module';
@@ -43,7 +43,7 @@ import { AdvertsModule } from './apps/adverts/adverts.module';
 		ProfileModule,
 		UsersModule,
 		SalesModule,
-		OrganizationsModule,
+		QuizesModule,
 		MeetingsModule
 	],
 	providers: []

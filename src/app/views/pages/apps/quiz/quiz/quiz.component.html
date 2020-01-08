@@ -1,0 +1,37 @@
+<kt-portlet>
+	<kt-portlet-header [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<div class="list-ccover">
+			<div class="roles-table">
+				<div class="role-body">
+					<div class="mt-4 mb-5 profile-data">
+						<div class="profile-card" *ngIf="quizDetails">
+							<div class="profile">
+								<img src="{{quizDetails.logo}}" alt="{{quizDetails.name}}'s logo'">
+								<div class="name" *ngIf="quizDetails.name">{{ quizDetails.name | uppercase }}</div>
+							</div>
+							<div class="details">
+								<div class="each-details" *ngIf="quizDetails.address">
+									<span class="title">Address: </span>
+									<span class="value">{{quizDetails.address}}</span>
+								</div>
+								<div class="each-details" *ngIf="quizDetails.color">
+									<span class="title">Color: </span>
+									<span class="value">{{quizDetails.color}}</span>
+								</div>
+								<div class="each-details" *ngIf="quizDetails.date">
+									<span class="title">Date: </span>
+									<span class="value">{{quizDetails.date | date: 'fullDate'}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="edit-btn text-center">
+						<button class="primary-button" routerLink="/cdash/quizs/manage">Edit details</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

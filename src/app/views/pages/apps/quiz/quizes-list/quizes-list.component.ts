@@ -1,38 +1,35 @@
 // Angular
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 // Services and Models
-import { OrganizationModel, OrganizationsService } from '../../../../../core/organizations';
-import { LayoutUtilsService } from '../../../../../core/_base/crud';
+import { QuizesService } from '../../../../../core/quizes';
 
 @Component({
-	selector: 'kt-organizations-list',
-	templateUrl: './organizations-list.component.html',
-	styleUrls: ['./organizations-list.component.scss']
+	selector: 'kt-quizes-list',
+	templateUrl: './quizes-list.component.html',
+	styleUrls: ['./quizes-list.component.scss']
 })
-export class OrganizationsListComponent implements OnInit, OnDestroy {
+export class QuizesListComponent implements OnInit, OnDestroy {
 	loading$: Observable<boolean>;
 	loadingSubject = new BehaviorSubject<boolean>(true);
-	organizations: OrganizationModel[];
+	quizes: any[];
 	pageIndex = 0;
 	limit = 10;
 	resultsLength: number = 0;
 	disablePrev = true;
 	disableNext: boolean;
 	editedStatus;
-	editedOrganization;
+	editedQuiz;
 	constructor(
-		private organizationsService: OrganizationsService,
-		private layoutUtilsService: LayoutUtilsService) { }
+		private quizesService: QuizesService) { }
 
 	ngOnInit() {
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
-		this.organizationsService.getOrganizationsCount().subscribe(
+		this.quizesService.getQuizesCount().subscribe(
 			countResult => {
 				this.resultsLength = countResult['count'];
-				if ( this.resultsLength <= 10) {
+				if (this.resultsLength <= 10) {
 					console.log('not up to 10', this.resultsLength);
 					this.disableNext = true;
 				} else {
@@ -42,11 +39,11 @@ export class OrganizationsListComponent implements OnInit, OnDestroy {
 			}
 		);
 		let skip = this.pageIndex * this.limit;
-		this.getOrganizations(skip, this.limit);
+		this.getQuizes(skip, this.limit);
 	}
 
-	getOrganizationsCount() {
-		this.organizationsService.getOrganizationsCount().subscribe(
+	getQuizesCount() {
+		this.quizesService.getQuizesCount().subscribe(
 			countResult => {
 				this.resultsLength = countResult['count'];
 				if (this.pageIndex > 0) {
@@ -56,14 +53,14 @@ export class OrganizationsListComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	getOrganizations(skip, limit) {
+	getQuizes(skip, limit) {
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
-		this.organizationsService.getOrganizations(skip, limit).subscribe(
+		this.quizesService.getQuizes(skip, limit).subscribe(
 			responseData => {
-				this.organizations = responseData['success'];
+				this.quizes = responseData['success'];
 				this.loadingSubject.next(false);
-				console.log('all organization returned', this.organizations);
+				console.log('all quiz returned', this.quizes);
 			},
 			error => {
 				console.log('error', error);
@@ -91,16 +88,16 @@ export class OrganizationsListComponent implements OnInit, OnDestroy {
 	getNext() {
 		this.pageIndex = this.pageIndex + 1;
 		let skip = this.pageIndex * this.limit;
-		this.getOrganizations(skip, this.limit);
-		this.getOrganizationsCount();
+		this.getQuizes(skip, this.limit);
+		this.getQuizesCount();
 		this.itemNav();
 	}
 
 	getPrev() {
 		this.pageIndex = this.pageIndex - 1;
 		let skip = this.pageIndex * this.limit;
-		this.getOrganizations(skip, this.limit);
-		this.getOrganizationsCount();
+		this.getQuizes(skip, this.limit);
+		this.getQuizesCount();
 		this.itemNav();
 	}
 

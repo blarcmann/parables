@@ -6,7 +6,6 @@ import { LayoutConfigService, MenuAsideService, MenuOptions } from '../../../../
 import { OffcanvasOptions } from '../../../../core/_base/layout';
 import { HtmlClassService } from '../html-class.service';
 import { Location } from '@angular/common';
-import { OrganizationsService } from '../../../../core/organizations';
 
 @Component({
 	selector: 'kt-aside-left',
@@ -56,7 +55,6 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		public menuAsideService: MenuAsideService,
 		public layoutConfigService: LayoutConfigService,
 		private location: Location,
-		private organizationsService: OrganizationsService,
 		private router: Router,
 		private render: Renderer2
 	) {

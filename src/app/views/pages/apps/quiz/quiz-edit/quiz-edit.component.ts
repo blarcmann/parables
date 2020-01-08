@@ -3,12 +3,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { OrganizationModel, OrganizationsService } from '../../../../../core/organizations';
+import { QuizesService } from '../../../../../core/quizes';
 // Layout
 import { LayoutConfigService } from '../../../../../core/_base/layout';
 // CRUD
 import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
-import { tap, map } from 'rxjs/operators';
 
 // imprts for date hiccup
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -20,21 +19,21 @@ const moment = _moment;
 
 @Component({
 	// tslint:disable-next-line:component-selector
-	selector: 'kt-organization-edit',
-	templateUrl: './organization-edit.component.html',
-	styleUrls: ['./organization-edit.component.scss'],
+	selector: 'kt-quiz-edit',
+	templateUrl: './quiz-edit.component.html',
+	styleUrls: ['./quiz-edit.component.scss'],
 	providers: [
 		{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 		{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
 	],
 })
-export class OrganizationEditComponent implements OnInit, OnDestroy {
-	organization: OrganizationModel;
+export class QuizEditComponent implements OnInit, OnDestroy {
+	quiz: any;
 	image: any;
 	loading$: Observable<boolean>;
 	loadingSubject = new BehaviorSubject<boolean>(true);
-	oldOrganization: OrganizationModel;
-	organizationForm: FormGroup;
+	oldQuiz: QuizesService;
+	quizForm: FormGroup;
 	hasFormErrors: boolean = false;
 	headerMargin: number;
 	selectedTab: number = 0;
@@ -49,58 +48,63 @@ export class OrganizationEditComponent implements OnInit, OnDestroy {
 		private router: Router,
 		private layoutUtilsService: LayoutUtilsService,
 		private fb: FormBuilder,
-		private organizationsService: OrganizationsService,
+		private quizesService: QuizesService,
 	) { }
 
 	ngOnInit() {
-		console.log('init component');
-		this.emptyOrganizationForm();
+		this.emptyQuizForm();
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
-		this.getOrganizationDetails();
+		if (this.activatedRoute.snapshot.params['id']) {
+			this.idParams = this.activatedRoute.snapshot.params['id'];
+			this.getQuizDetails(this.idParams);
+		}
 		window.onload = () => {
 			const style = getComputedStyle(document.getElementById('kt_header'));
 			this.headerMargin = parseInt(style.height, 0);
 		};
 	}
 
-	getOrganizationDetails() {
+	getQuizDetails(id) {
 		console.log('start gettting org detail');
-		this.organizationsService.getOrganization().subscribe(organizationDetails => {
-			console.log('organization details full', organizationDetails);
-			this.organization = organizationDetails['data'];
-			const organizationData = organizationDetails['data'];
-			this.initOrganizationForm(organizationData);
+		this.quizesService.getQuiz(id).subscribe(quizDetails => {
+			console.log('quiz details full', quizDetails);
+			this.quiz = quizDetails['data'];
+			const quizData = quizDetails['data'];
+			this.initQuizForm(quizData);
 			this.loadingSubject.next(false);
-			return this.organization;
+			return this.quiz;
 		});
 	}
 
-	emptyOrganizationForm() {
-		this.organizationForm = this.fb.group({
+	emptyQuizForm() {
+		this.quizForm = this.fb.group({
 			name: ['', Validators.required],
 			address: ['', Validators.required],
 			color: [''],
 		});
 	}
-	initOrganizationForm(organization: any = {}) {
-		this.organizationForm = this.fb.group({
-			name: [organization.name || '', Validators.required],
-			address: [organization.address || '', Validators.required],
-			color: [organization.color || '']
+	initQuizForm(quiz: any = {}) {
+		this.quizForm = this.fb.group({
+			name: [quiz.name || '', Validators.required],
+			address: [quiz.address || '', Validators.required],
+			color: [quiz.color || '']
 		});
 	}
 
 	getComponentTitle() {
-		const result = `Edit Organization`;
+		let result = `Add quiz`;
+		if (this.idParams) {
+			result = 'Edit quiz';
+		}
 		return result;
 	}
 
 	onSubmit() {
 		this.hasFormErrors = false;
-		const controls = this.organizationForm.controls;
+		const controls = this.quizForm.controls;
 		this.loadingSubject.next(true);
-		if (this.organizationForm.invalid) {
+		if (this.quizForm.invalid) {
 			this.loadingSubject.next(false);
 			Object.keys(controls).forEach(controlName =>
 				controls[controlName].markAsTouched()
@@ -109,54 +113,57 @@ export class OrganizationEditComponent implements OnInit, OnDestroy {
 			this.selectedTab = 0;
 			return;
 		}
-			let editedOrganization = this.organizationForm.value;
-			console.log('Organization to send', editedOrganization);
-			this.updateOrganization();
+		if (this.idParams) {
+			let editedQuiz = this.quizForm.value;
+			console.log('Quiz to send', editedQuiz);
+			this.updateQuiz();
 			return;
+		} else {
+			this.addQuiz();
+		}
 	}
 
-	updateOrganization() {
+	updateQuiz() {
 		this.loadingSubject.next(true);
 		let updPayload = new FormData();
-		updPayload.append('name', this.organizationForm.get('name').value);
-		updPayload.append('address', this.organizationForm.get('address').value);
-		updPayload.append('color', this.organizationForm.get('color').value);
+		updPayload.append('name', this.quizForm.get('name').value);
+		updPayload.append('address', this.quizForm.get('address').value);
+		updPayload.append('color', this.quizForm.get('color').value);
 		if (this.fSelected) {
 			updPayload.append('logo', this.fSelected, this.fSelected.name);
 		}
-		this.organizationsService.updateOrganization(updPayload).subscribe(
+		this.quizesService.updateQuiz(this.idParams, updPayload).subscribe(
 			data => {
 				console.log('success reponse', data);
 				this.loadingSubject.next(false);
-				const message = `Organization has been Successfully Updated`;
+				const message = `Quiz has been Successfully Updated`;
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-				this.router.navigate(['/cdash/organizations/organization']);
+				this.router.navigate(['/para/quizes']);
 			},
 			error => {
 				this.loadingSubject.next(false);
 				console.log('Error response', error);
-				const title = 'Please Retry';
 				const message = 'Sorry, Temporary Error Occured';
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 			});
 	}
 
-	addOrganization(_organization: OrganizationModel, withBack: boolean = false) {
+	addQuiz() {
 		this.loadingSubject.next(true);
 		let updPayload = new FormData();
-		updPayload.append('name', this.organizationForm.get('name').value);
-		updPayload.append('address', this.organizationForm.get('address').value);
-		updPayload.append('color', this.organizationForm.get('color').value);
+		updPayload.append('name', this.quizForm.get('name').value);
+		updPayload.append('address', this.quizForm.get('address').value);
+		updPayload.append('color', this.quizForm.get('color').value);
 		if (this.fSelected) {
 			updPayload.append('logo', this.fSelected, this.fSelected.name);
 		}
-		this.organizationsService.createOrganization(updPayload).subscribe(
+		this.quizesService.createQuiz(updPayload).subscribe(
 			data => {
 				this.loadingSubject.next(false);
 				console.log('success reponse', data);
 				const message = `Success`;
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-				this.router.navigate(['/cdash/organization/organizations']);
+				this.router.navigate(['/cdash/quiz/quizes']);
 			}, error => {
 				this.loadingSubject.next(false);
 				console.log('Error response', error);
@@ -167,12 +174,12 @@ export class OrganizationEditComponent implements OnInit, OnDestroy {
 	}
 
 	reset() {
-		this.organization = Object.assign({}, this.oldOrganization);
-		this.emptyOrganizationForm();
+		this.quiz = Object.assign({}, this.oldQuiz);
+		this.emptyQuizForm();
 		this.hasFormErrors = false;
-		this.organizationForm.markAsPristine();
-		this.organizationForm.markAsUntouched();
-		this.organizationForm.updateValueAndValidity();
+		this.quizForm.markAsPristine();
+		this.quizForm.markAsUntouched();
+		this.quizForm.updateValueAndValidity();
 	}
 
 	onFileChange(event) {

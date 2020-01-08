@@ -29,7 +29,6 @@ import { ContactsService } from '../../../../core/contacts';
 import { CampaignsService } from '../../../../core/campaigns';
 import { MeetingsService } from '../../../../core/meetings';
 import { ParablesService } from '../../../../core/parables';
-import { StaffEditComponent } from './staff-edit/staff-edit.component';
 import { StaffComponent } from './staff/staff.component';
 import { PasswordEditComponent } from './password/password-edit.component';
 import { ProfileEditComponent } from './profile-edit/profile-edit.component';
@@ -127,16 +126,8 @@ const routes: Routes = [
 				component: ClaimEditComponent
 			},
 			{
-				path: 'staff/manage',
-				component: StaffEditComponent
-			},
-			{
 				path: 'staffs/:id',
 				component: StaffComponent
-			},
-			{
-				path: 'staff/manage/:id',
-				component: StaffEditComponent
 			},
 			{
 				path: 'manage/:id',
@@ -227,7 +218,6 @@ const routes: Routes = [
 	declarations: [
 		UsersComponent,
 		StaffsListComponent,
-		StaffEditComponent,
 		UsersListComponent,
 		RolesListComponent,
 		UserEditComponent,

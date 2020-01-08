@@ -2,13 +2,13 @@
 	<kt-portlet-header [title]="getComponentTitle()" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
 	</kt-portlet-header>
 	<kt-portlet-body>
-		<form [formGroup]="organizationForm">
+		<form [formGroup]="quizForm">
 			<div class="form-group">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="form-item">
-							<label class="label">Organization's name</label>
-							<input type="text" placeholder="Enter Organization name" formControlName="name">
+							<label class="label"></label>
+							<input type="text" placeholder="Enter Quiz name" formControlName="name">
 						</div>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="form-item no-padding">
-							<label class="label">Organization color</label>
+							<label class="label">Quiz color</label>
 							<input type="color" placeholder="Choose organization color"
 								formControlName="color">
 						</div>

@@ -9,10 +9,10 @@ import { ModuleGuard } from '../../../../core/auth';
 // UI
 import { PartialsModule } from '../../../partials/partials.module';
 // Components
-import { OrganizationsComponent } from './organizations.component';
-import { OrganizationsListComponent } from './organizations-list/organizations-list.component';
-import { OrganizationEditComponent } from './organization-edit/organization-edit.component';
-import { OrganizationComponent } from './organization/organization.component';
+import { QuizesComponent } from './quizes.component';
+import { QuizesListComponent } from './quizes-list/quizes-list.component';
+import { QuizEditComponent } from './quiz-edit/quiz-edit.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 // Core => utils
@@ -23,7 +23,7 @@ import { HttpUtilsService,
 } from '../../../../core/_base/crud';
 
 // Core => service
-import { OrganizationsService } from '../../../../core/organizations';
+import { QuizesService } from '../../../../core/quizes';
 import {
 	ActionNotificationComponent,
 	DeleteEntityDialogComponent,
@@ -59,33 +59,33 @@ import {
 const routes: Routes = [
 	{
 		path: '',
-		component: OrganizationsComponent,
+		component: QuizesComponent,
 		children: [
 			{
 				path: '',
-				redirectTo: 'organization',
+				redirectTo: 'quiz',
 				pathMatch: 'full'
 			},
 			{
-				path: 'organizations',
-				component: OrganizationsListComponent,
+				path: 'quizes',
+				component: QuizesListComponent,
 				pathMatch: 'full'
 			},
 			{
-				path: 'organization',
-				component: OrganizationComponent,
+				path: 'quiz',
+				component: QuizComponent,
 			},
 			{
 				path: 'manage',
-				component: OrganizationEditComponent
+				component: QuizEditComponent
 			},
 			{
 				path: 'manage/:id',
-				component: OrganizationEditComponent
+				component: QuizEditComponent
 			},
 			{
-				path: 'organization/:id',
-				component: OrganizationComponent,
+				path: 'quiz/:id',
+				component: QuizComponent,
 			}
 		]
 	}
@@ -141,7 +141,7 @@ const routes: Routes = [
 				width: '900px'
 			}
 		},
-		OrganizationsService
+		QuizesService
 	],
 	entryComponents: [
 		ActionNotificationComponent,
@@ -150,10 +150,10 @@ const routes: Routes = [
 		UpdateStatusDialogComponent
 	],
 	declarations: [
-		OrganizationsComponent,
-		OrganizationsListComponent,
-		OrganizationEditComponent,
-		OrganizationComponent,
+		QuizesComponent,
+		QuizesListComponent,
+		QuizEditComponent,
+		QuizComponent,
 	]
 })
-export class OrganizationsModule { }
+export class QuizesModule { }

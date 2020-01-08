@@ -31,8 +31,8 @@ const routes: Routes = [
 				loadChildren: 'app/views/pages/apps/users/users.module#UsersModule'
 			},
 			{
-				path: 'organizations',
-				loadChildren: 'app/views/pages/apps/organizations/organizations.module#OrganizationsModule'
+				path: 'quizes',
+				loadChildren: 'app/views/pages/apps/quiz/quizes.module#QuizesModule'
 			},
 			{
 				path: 'computations',
