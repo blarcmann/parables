@@ -66,6 +66,15 @@ export class AdvertsService {
 		});
 	}
 
+	changeStatus(status, id) {
+		const userToken = localStorage.getItem(environment.authTokenKey);
+		return this.http.put<any>(`${BASE_URL}/ad/status/${id}`, status, {
+			headers: {
+				'Authorization': 'Bearer ' + userToken,
+			}
+		});
+	}
+
 
 	// update a contact
 	// delete a contact

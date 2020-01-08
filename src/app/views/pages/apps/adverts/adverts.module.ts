@@ -72,15 +72,19 @@ const routes: Routes = [
 				component: AdvertsListComponent,
 			},
 			{
-				path: ':media',
-				component: AdvertComponent
-			},
-			{
-				path: 'manage/advert',
+				path: 'edit',
 				component: AdvertEditComponent
 			},
 			{
-				path: 'link/:id',
+				path: 'edit/:id',
+				component: AdvertEditComponent
+			},
+			{
+				path: ':id',
+				component: AdvertComponent
+			},
+			{
+				path: ':id',
 				component: AdvertComponent,
 			},
 		]

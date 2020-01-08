@@ -29,7 +29,6 @@ export class AdvertComponent implements OnInit {
 		this.loadingSubject.next(true);
 		this.advertId = this.route.snapshot.params['id'];
 		this.getAdvert(this.advertId);
-		this.loadingSubject.next(false);
 	}
 
 	getAdvert(id) {
@@ -46,15 +45,32 @@ export class AdvertComponent implements OnInit {
 		this._location.back();
 	}
 
+	changeStatus() {
+		let status  = false;
+		if (this.advertDetails.active === true) {
+			status = false;
+		} else {
+			status = true;
+		}
+		const payload = {status};
+		this.advertsService.changeStatus(payload, this.advertId).subscribe(
+			response => {
+				this.layoutUtilsService.showActionNotification('Successful', MessageType.Update);
+				this.getAdvert(this.advertId);
+				this.loadingSubject.next(false);
+			}
+		);
+	}
+
 	onDelete() {
 		if (this.route.snapshot.params['media'] === 'facebook') {
 			localStorage.setItem('facebookDetails', '');
 			return this.router.navigate(['/cdash/adverts/adverts']);
 		}
-		const _title: string = 'Delete ADs';
+		const _title: string = 'Delete Advert';
 		const _description: string = 'Are you sure to permanently delete the ADs?';
-		const _waitDesciption: string = 'ADs will be deleted...';
-		const _deleteMessage = `ADs has been deleted`;
+		const _waitDesciption: string = 'Advert will be deleted...';
+		const _deleteMessage = `Advert has been deleted`;
 		const _errorDelete = 'Seems and Error Occured, Retry';
 
 		const dialogRef = this.layoutUtilsService.deleteElement(_title, _description, _waitDesciption);

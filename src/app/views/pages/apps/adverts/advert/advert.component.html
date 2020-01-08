@@ -3,8 +3,16 @@
 		<ng-container ktPortletTools>
 			<div class="details-action delete text-center" (click)="onDelete()">
 				<img src="./assets/media/icons/details-delete.svg" alt="">
-				<span>Delete account</span>
+				<span>Delete ADs</span>
 			</div>
+			<a class="details-action options kt-margin-r-10" matTooltip="ADs status" *ngIf="advertDetails" [matMenuTriggerFor]="menu">
+				<i class="la la-cog"></i>
+				&nbsp;
+				<span class="kt-hidden-mobile">ADs status</span>
+			</a>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item (click)="changeStatus()">{{advertDetails && advertDetails.active ? 'Deactivate advert' : 'Activate'}}</button>
+			</mat-menu>
 		</ng-container>
 	</kt-portlet-header>
 	<kt-portlet-body>
@@ -25,10 +33,24 @@
 							<a href="{{advertDetails.link}}" target="_blank">{{advertDetails.link}}</a>
 						</td>
 					</tr>
+					<tr class="each-data" *ngIf="advertDetails.clicks !== null">
+						<td class="label">No. of clicks</td>
+						<td class="value">{{advertDetails.clicks}} times</td>
+					</tr>
+					<tr class="each-data" *ngIf="advertDetails.opens !== null">
+						<td class="label">No. of opens</td>
+						<td class="value">{{advertDetails.opens}} times</td> 
+					</tr>
+					<tr class="each-data" *ngIf="advertDetails.active !== null">
+						<td class="label">ADs status</td>
+						<td class="value status">
+							<span class="scheduledMeeting">{{(advertDetails.active ? 'active' : 'inactive') | uppercase}}</span>
+						</td> 
+					</tr>
 					<tr class="each-data" *ngIf="advertDetails.image">
 						<td class="label">Image</td>
 						<td class="images">
-							<img src="{{advertDetails.file.Location}}" alt="Media file">
+							<img src="{{advertDetails.image.Location}}" alt="Media file"> 
 						</td>
 					</tr>
 					
