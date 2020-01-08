@@ -43,8 +43,8 @@ const routes: Routes = [
 				loadChildren: 'app/views/pages/apps/parables/parables.module#ParablesModule'
 			},
 			{
-				path: 'socials',
-				loadChildren: 'app/views/pages/apps/socials/socials.module#SocialsModule'
+				path: 'adverts',
+				loadChildren: 'app/views/pages/apps/adverts/adverts.module#AdvertsModule'
 			},
 			{
 				path: 'reports',

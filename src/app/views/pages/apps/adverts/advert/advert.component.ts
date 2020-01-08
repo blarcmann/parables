@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SocialsService } from '../../../../../core/socials';
+import { AdvertsService } from '../../../../../core/adverts';
 import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
 import { Location } from '@angular/common';
 
 
 @Component({
-	selector: 'kt-social',
-	templateUrl: './social.component.html',
-	styleUrls: ['./social.component.scss']
+	selector: 'kt-advert',
+	templateUrl: './advert.component.html',
+	styleUrls: ['./advert.component.scss']
 })
-export class SocialComponent implements OnInit {
+export class AdvertComponent implements OnInit {
 	loading$: Observable<boolean>;
 	loadingSubject = new BehaviorSubject<boolean>(true);
 	proceedingOption: string;
-	socialId: string;
-	socialDetails: any;
+	advertId: string;
+	advertDetails: any;
 	constructor(
 		private route: ActivatedRoute,
-		private socialsService: SocialsService,
+		private advertsService: AdvertsService,
 		private _location: Location,
 		private layoutUtilsService: LayoutUtilsService,
 		private router: Router) { }
@@ -27,26 +27,17 @@ export class SocialComponent implements OnInit {
 	ngOnInit() {
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
-		console.log('uuuuurrrrrrlllll', window.location.href);
-		this.socialId = this.route.snapshot.params['media'];
-		if (this.route.snapshot.params['media'] === 'facebook') {
-			if (localStorage.getItem('facebookDetails')) {
-				console.log('facebook');
-				this.socialDetails = JSON.parse(localStorage.getItem('facebookDetails'));
-			}
-		} else {
-			this.getSocialAccount(this.socialId);
-		}
+		this.advertId = this.route.snapshot.params['id'];
+		this.getAdvert(this.advertId);
 		this.loadingSubject.next(false);
 	}
 
-	getSocialAccount(id) {
+	getAdvert(id) {
 		this.loadingSubject.next(true);
-		this.socialsService.getSingleSocial(id).subscribe(
-			socialDetail => {
-				console.log('sosocialls', socialDetail);
+		this.advertsService.getAdvert(id).subscribe(
+			advertDetail => {
+				this.advertDetails = advertDetail['data'];
 				this.loadingSubject.next(false);
-				this.socialDetails = socialDetail['data'].data;
 			}
 		);
 	}
@@ -58,12 +49,12 @@ export class SocialComponent implements OnInit {
 	onDelete() {
 		if (this.route.snapshot.params['media'] === 'facebook') {
 			localStorage.setItem('facebookDetails', '');
-			return this.router.navigate(['/cdash/socials/socials']);
+			return this.router.navigate(['/cdash/adverts/adverts']);
 		}
-		const _title: string = 'Delete Account';
-		const _description: string = 'Are you sure to permanently delete the account?';
-		const _waitDesciption: string = 'Acount will be deleted...';
-		const _deleteMessage = `Account has been deleted`;
+		const _title: string = 'Delete ADs';
+		const _description: string = 'Are you sure to permanently delete the ADs?';
+		const _waitDesciption: string = 'ADs will be deleted...';
+		const _deleteMessage = `ADs has been deleted`;
 		const _errorDelete = 'Seems and Error Occured, Retry';
 
 		const dialogRef = this.layoutUtilsService.deleteElement(_title, _description, _waitDesciption);
@@ -72,11 +63,11 @@ export class SocialComponent implements OnInit {
 			if (!res) {
 				return;
 			}
-			this.socialsService.deleteAccount(this.socialId).subscribe(
+			this.advertsService.deleteAdvert(this.advertId).subscribe(
 				deleted => {
 					console.log('deleted', deleted);
 					this.layoutUtilsService.showActionNotification(_deleteMessage, MessageType.Delete);
-					this.router.navigate(['/cdash/socials/socials']);
+					this.router.navigate(['/cdash/adverts/adverts']);
 				},
 				error => {
 					console.log('error', error);

@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { SocialsService } from '../../../../../core/socials';
+import { AdvertsService } from '../../../../../core/adverts';
 // Layout
 import { LayoutConfigService } from '../../../../../core/_base/layout';
 // CRUD
@@ -17,27 +17,23 @@ import { Location } from '@angular/common';
 
 @Component({
 	// tslint:disable-next-line:component-selector
-	selector: 'kt-social-edit',
-	templateUrl: './social-edit.component.html',
-	styleUrls: ['./social-edit.component.scss']
+	selector: 'kt-advert-edit',
+	templateUrl: './advert-edit.component.html',
+	styleUrls: ['./advert-edit.component.scss']
 })
-export class SocialEditComponent implements OnInit, OnDestroy {
-	social;
+export class AdvertEditComponent implements OnInit, OnDestroy {
+	advert;
 	image: any;
 	loading$: Observable<boolean>;
 	loadingSubject = new BehaviorSubject<boolean>(true);
-	socialForm: FormGroup;
+	advertForm: FormGroup;
 	hasFormErrors: boolean = false;
 	headerMargin: number;
 	selectedTab: number = 0;
 	idParams: string;
-	ssocial = 'facebook';
-	BASE_URL = environment.BASE_URL;
-	appID = '';
-	customerKey = '';
-	customerSecret = '';
-	callbackUrl = '';
-	appURL = '';
+	title = '';
+	link = '';
+	fs;
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private router: Router,
@@ -46,16 +42,15 @@ export class SocialEditComponent implements OnInit, OnDestroy {
 		private layoutUtilsService: LayoutUtilsService,
 		private layoutConfigService: LayoutConfigService,
 		private fb: FormBuilder,
-		private socialsService: SocialsService
+		private advertsService: AdvertsService
 	) { }
 
 	ngOnInit() {
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
-		this.appURL = window.location.href;
 		if (this.activatedRoute.snapshot.params['id']) {
-			console.log('id found', this.activatedRoute.snapshot.params['id']);
 			this.idParams = this.activatedRoute.snapshot.params['id'];
+			this.getAdvertDetails();
 		}
 		window.onload = () => {
 			const style = getComputedStyle(document.getElementById('kt_header'));
@@ -68,28 +63,24 @@ export class SocialEditComponent implements OnInit, OnDestroy {
 		this._location.back();
 	}
 
-	getSocialDetails() {
-		return this.socialsService.getLinkById(this.idParams).pipe(
-			map(socialDetails => {
-				this.social = socialDetails;
-				this.loadingSubject.next(false);
-				console.log('retrieving social with pipe', this.social);
-				return this.social;
-			})
-		);
+	getAdvertDetails() {
+		this.loadingSubject.next(true);
+		this.advertsService.getAdvert(this.idParams).subscribe(advertDetails => {
+			this.advert = advertDetails['data'];
+			this.title = this.advert.title;
+			this.link = this.advert.link;
+			this.loadingSubject.next(false);
+		});
 	}
 
-	passSocial(event) {
-		this.ssocial = event.target.value;
-	}
 
 	getComponentTitle() {
 		let result = 'Please Wait';
-		if (!this.social || !this.social.code) {
-			result = 'Add Social Media Campaign';
+		if (!this.advert || !this.advert.code) {
+			result = 'Add advert';
 			return result;
 		}
-		result = `Edit Social Media Campaign`;
+		result = `Edit advert`;
 		return result;
 	}
 
@@ -97,51 +88,31 @@ export class SocialEditComponent implements OnInit, OnDestroy {
 		this.hasFormErrors = false;
 		this.loadingSubject.next(true);
 		/** check form */
-		if (this.social) {
-			this.updateSocial();
+		if (this.advert) {
+			this.updateAdvert();
 			return;
 		}
-		this.addSocial();
+		this.addAdvert();
 	}
 
 
-	addSocial() {
+	addAdvert() {
 		this.loadingSubject.next(true);
-		let payload;
-		if (this.ssocial === 'facebook') {
-			if (this.appID === '') {
-				const message = 'appID is compulsory';
-				return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-			}
-			localStorage.setItem('fbkID', this.appID);
-			payload = {
-				type: 'facebook',
-				data: {
-					app_id: this.appID
-				}
-			};
-		} else {
-			if (this.customerKey === '' || this.customerSecret === '' || this.callbackUrl === '') {
-				const message = 'All fields are compulsory';
-				return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-			}
-			payload = {
-				type: 'twitter',
-				data: {
-					consumerKey: this.customerKey,
-					consumerSecret: this.customerSecret,
-					callbackUrl: this.callbackUrl
-				}
-			};
+		if (this.link === '' || this.title === '' || !this.fs) {
+			const message = 'All fields are compulsory';
+			this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 		}
-		this.socialsService.addSocial(payload).subscribe(
+		let payload = new FormData();
+		payload.append('title', this.title);
+		payload.append('link', this.link);
+		payload.append('image', this.fs, this.fs.name);
+		this.advertsService.createAdvert(payload).subscribe(
 			data => {
 				this.loadingSubject.next(false);
 				console.log('success reponse', data);
-				const message = `Social account has been Successfully added`;
-				localStorage.setItem('registeredTwitter', 'true');
+				const message = `Advert has been Successfully added`;
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-				this.router.navigate(['/cdash/socials/socials']);
+				this.router.navigate(['/para/adverts/adverts']);
 			}, error => {
 				this.loadingSubject.next(false);
 				console.log('Error response', error);
@@ -151,32 +122,23 @@ export class SocialEditComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	updateSocial() {
-		let payload;
-		if (this.ssocial === 'facebook') {
-			payload = {
-				type: 'facebook',
-				data: {
-					app_id: this.appID
-				}
-			};
-		} else {
-			payload = {
-				type: 'twitter',
-				data: {
-					consumerKey: this.customerKey,
-					consumerSecret: this.customerSecret,
-					callbackUrl: this.BASE_URL
-				}
-			};
+	updateAdvert() {
+		this.loadingSubject.next(true);
+		if (this.link === '' || this.title === '' || !this.fs) {
+			const message = 'All fields are compulsory';
+			this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 		}
-		this.socialsService.updateLink(payload, this.social.code).subscribe(
+		let payload = new FormData();
+		payload.append('title', this.title);
+		payload.append('link', this.link);
+		payload.append('image', this.fs, this.fs.name);
+		this.advertsService.updateAdvert(payload, this.idParams).subscribe(
 			data => {
 				console.log('success reponse', data);
 				this.loadingSubject.next(false);
 				const message = `Updated Successfully`;
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-				this.router.navigate(['/strada/socials/socials']);
+				this.router.navigate(['/para/adverts/adverts']);
 			},
 			error => {
 				this.loadingSubject.next(false);
@@ -187,18 +149,16 @@ export class SocialEditComponent implements OnInit, OnDestroy {
 			});
 	}
 
-
-	reset() {
-		this.appID = '';
-		this.customerKey = '';
-		this.customerSecret = '';
+	onFileChange(event) {
+		this.fs = event.target.files[0];
 	}
 
-	/**
-	 * Close alert
-	 *
-	 * @param $event
-	 */
+
+	reset() {
+		this.title = '';
+		this.link = '';
+	}
+
 	onAlertClose($event) {
 		this.hasFormErrors = false;
 	}

@@ -1,0 +1,40 @@
+<kt-portlet>
+	<kt-portlet-header title="Social media details" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+		<ng-container ktPortletTools>
+			<div class="details-action delete text-center" (click)="onDelete()">
+				<img src="./assets/media/icons/details-delete.svg" alt="">
+				<span>Delete account</span>
+			</div>
+		</ng-container>
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<div class="goback" (click)="goBack()">
+			<img src="./assets/media/icons/backBtn.svg" alt="">
+			<span>Back</span>
+		</div>
+		<div class="contact-body" *ngIf="advertDetails">
+			<div class="item-details p-3 pt-0">
+				<table class="ml-5 details-table">
+					<tr class="each-data" *ngIf="advertDetails.title">
+						<td class="label">ADs title</td>
+						<td class="value">{{ advertDetails.title }}</td>
+					</tr>
+					<tr class="each-data" *ngIf="advertDetails.link">
+						<td class="label">ADs link</td>
+						<td class="value">
+							<a href="{{advertDetails.link}}" target="_blank">{{advertDetails.link}}</a>
+						</td>
+					</tr>
+					<tr class="each-data" *ngIf="advertDetails.image">
+						<td class="label">Image</td>
+						<td class="images">
+							<img src="{{advertDetails.file.Location}}" alt="Media file">
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+			<div *ngIf="!advertDetails" class="mt-5 please-data text-center">Please refresh page...</div>
+		</div>
+	</kt-portlet-body>
+</kt-portlet>

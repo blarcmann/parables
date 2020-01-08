@@ -9,28 +9,11 @@ import { ModuleGuard } from '../../../../core/auth';
 // UI
 import { PartialsModule } from '../../../partials/partials.module';
 // Components
-import { SocialsComponent } from './socials.component';
+import { AdvertsComponent } from './adverts.component';
 // Leads Actions
-import { SocialsListComponent } from './socials-list/socials-list.component';
-import { NgCircleProgressModule } from 'ng-circle-progress';
-import { SocialEditComponent } from './social-edit/social-edit.component';
-import { SocialComponent } from './social/social.component';
-import { SocialLoginModule } from 'angularx-social-login';
-import { AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
-
-let fbkID = localStorage.getItem('fbkID');
-FacebookLoginProvider.PROVIDER_ID = fbkID;
-const config = new AuthServiceConfig([
-	{
-		id: FacebookLoginProvider.PROVIDER_ID,
-		provider: new FacebookLoginProvider(fbkID)
-	},
-
-]);
-
-export function provideConfig() {
-	return config;
-}
+import { AdvertsListComponent } from './advert-list/adverts-list.component';
+import { AdvertEditComponent } from './advert-edit/advert-edit.component';
+import { AdvertComponent } from './advert/advert.component';
 
 // Core => utils
 import {
@@ -41,7 +24,7 @@ import {
 } from '../../../../core/_base/crud';
 
 // Core => service
-import { SocialsService } from '../../../../core/socials';
+import { AdvertsService } from '../../../../core/adverts';
 import {
 	ActionNotificationComponent,
 	DeleteEntityDialogComponent,
@@ -77,28 +60,28 @@ import {
 const routes: Routes = [
 	{
 		path: '',
-		component: SocialsComponent,
+		component: AdvertsComponent,
 		children: [
 			{
 				path: '',
-				redirectTo: 'socials',
+				redirectTo: 'adverts',
 				pathMatch: 'full'
 			},
 			{
-				path: 'socials',
-				component: SocialsListComponent,
+				path: 'adverts',
+				component: AdvertsListComponent,
 			},
 			{
 				path: ':media',
-				component: SocialComponent
+				component: AdvertComponent
 			},
 			{
-				path: 'manage/social',
-				component: SocialEditComponent
+				path: 'manage/advert',
+				component: AdvertEditComponent
 			},
 			{
 				path: 'link/:id',
-				component: SocialComponent,
+				component: AdvertComponent,
 			},
 		]
 	}
@@ -133,21 +116,6 @@ const routes: Routes = [
 		MatSnackBarModule,
 		MatTooltipModule,
 		MatStepperModule,
-		NgCircleProgressModule.forRoot({
-			radius: 65,
-			outerStrokeWidth: 16,
-			innerStrokeWidth: 8,
-			animationDuration: 300,
-			subtitleFontSize: '22',
-			showInnerStroke: false,
-			showUnits: false,
-			unitsColor: '#9D9D9D',
-			showTitle: false,
-			showSubtitle: true,
-			animation: true,
-			outerStrokeGradient: true
-		}),
-		SocialLoginModule
 	],
 	providers: [
 		ModuleGuard,
@@ -169,11 +137,7 @@ const routes: Routes = [
 				width: '900px'
 			}
 		},
-		SocialsService,
-		{
-			provide: AuthServiceConfig,
-			useFactory: provideConfig
-		}
+		AdvertsService,
 	],
 	entryComponents: [
 		ActionNotificationComponent,
@@ -182,10 +146,10 @@ const routes: Routes = [
 		UpdateStatusDialogComponent,
 	],
 	declarations: [
-		SocialsComponent,
-		SocialsListComponent,
-		SocialEditComponent,
-		SocialComponent
+		AdvertsComponent,
+		AdvertsListComponent,
+		AdvertEditComponent,
+		AdvertComponent
 	]
 })
-export class SocialsModule { }
+export class AdvertsModule { }

@@ -21,7 +21,7 @@ import { SalesModule } from './apps/sales/sales.module';
 import { OrganizationsModule } from './apps/organizations/organizations.module';
 import { ComputationsModule } from './apps/computations/computations.module';
 import { ParablesModule } from './apps/parables/parables.module';
-import { SocialsModule } from './apps/socials/socials.module';
+import { AdvertsModule } from './apps/adverts/adverts.module';
 
 @NgModule({
 	declarations: [MyPageComponent],
@@ -39,7 +39,7 @@ import { SocialsModule } from './apps/socials/socials.module';
 		MdTasksModule,
 		ComputationsModule,
 		ReportsModule,
-		SocialsModule,
+		AdvertsModule,
 		ProfileModule,
 		UsersModule,
 		SalesModule,
