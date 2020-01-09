@@ -2,9 +2,9 @@ export class UsersTable {
 	public static users: any = [
 		{
 			id: 1,
-			username: 'admin',
-			password: 'demo',
-			email: 'admin@demo.com',
+			username: '',
+			password: '',
+			email: '',
 			accessToken: 'access-token-8f3ae836da744329a6f93bf20594b5cc',
 			refreshToken: 'access-token-f8c137a2c98743f48b643e71161d90aa',
 			roles: [1], // Administrator
@@ -20,10 +20,10 @@ export class UsersTable {
 				postCode: '45000'
 			},
 			socialNetworks: {
-				linkedIn: 'https://linkedin.com/admin',
-				facebook: 'https://facebook.com/admin',
-				twitter: 'https://twitter.com/admin',
-				instagram: 'https://instagram.com/admin'
+				linkedIn: 'https://linkedin.com',
+				facebook: 'https://facebook.com',
+				twitter: 'https://twitter.com',
+				instagram: 'https://instagram.com'
 			}
 		},
 		{

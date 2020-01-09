@@ -35,7 +35,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 	) { }
 
 	ngOnInit() {
-		this.idParams = localStorage.getItem('loginId');
+		this.idParams = localStorage.getItem('userId');
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
 		this.initEditUserForm();
@@ -50,9 +50,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 	getUserDetails() {
 		return this.usersService.getUserById(this.idParams).pipe(
 			map(userDetails => {
-				this.user = userDetails['data'];
+				let u = userDetails['data'];
+				this.user = u;
 				this.loadingSubject.next(false);
-				console.log('retrieving user with pipe', this.user);
 				return this.user;
 			})
 		);
@@ -100,11 +100,11 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
 	updateUser() {
 		if (this.profileForm.get('password').value !== this.profileForm.get('confirm_password').value) {
-			this.hasFormErrors = true;
-			return this.errorMessage = 'Password does not match';
+			const message = 'Password does not match';
+			return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 		}
 		const payload = {
-			user: this.idParams,
+			user: this.user._id,
 			name: this.profileForm.get('name').value,
 			password: this.profileForm.get('password').value
 		};
@@ -113,7 +113,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 				this.loadingSubject.next(false);
 				const message = `Updated Successfully`;
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
-				this.router.navigate(['/cdash/users/users']);
+				this.router.navigate(['/para/profile']);
 			},
 			error => {
 				this.loadingSubject.next(false);

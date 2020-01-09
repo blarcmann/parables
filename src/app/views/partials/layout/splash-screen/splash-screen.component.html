@@ -2,5 +2,5 @@
 <div #splashScreen class="kt-splash-screen">
 	<img *ngIf="loaderType === 'spinner-logo'" [attr.src]="loaderLogo" alt="Logo">
 	<span *ngIf="loaderType === 'spinner-message'">Please wait...</span>
-	<!-- <mat-spinner diameter="40"></mat-spinner> -->
+	<mat-spinner color="accent" diameter="20"></mat-spinner>
 </div>
