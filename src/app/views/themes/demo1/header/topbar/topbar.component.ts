@@ -20,7 +20,8 @@ export class TopbarComponent implements OnInit {
 	getUserDetails(id) {
 		this.usersService.getUserById(id).subscribe(
 			singleUser => {
-				this.userDetails = singleUser['data'];
+				let usrr = singleUser['data'];
+				this.userDetails = usrr[0];
 			},
 			error => {
 				console.log('error occured', error);
