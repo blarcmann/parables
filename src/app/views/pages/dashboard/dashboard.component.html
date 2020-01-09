@@ -46,3 +46,35 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5">
+	<div class="mx-auto col-lg-4 col-md-6">
+		<div class="claim-body pt-5">
+			<table class="table-view">
+				<thead>
+					<tr>
+						<th>POS</th>
+						<th>Username</th>
+						<th>Date</th>
+						<th>Score</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr className="each-row" *ngFor="let user of leaders; let i = index;">
+						<td>{{i+1}}</td>
+						<td>{{user.name | titlecase}}</td>
+						<td>{{user.email}}</td>
+						<td>{{user.type ? user.type : 'not available'}}</td>
+						<td>
+							<a routerLink="/cdash/users/user/{{user._id}}" class="view">View</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="empty-list text-center" *ngIf="!leaders || leaders.length === 0">
+				<img src="./assets/media/icons/empty-list.png" alt="">
+				<p>No leaderscore found.</p>
+			</div>
+		</div>
+	</div>
+</div>

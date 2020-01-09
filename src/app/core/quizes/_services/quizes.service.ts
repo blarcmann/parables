@@ -25,6 +25,15 @@ export class QuizesService {
 		});
 	}
 
+	getLeaders(): Observable<any[]> {
+		const userToken = localStorage.getItem(environment.authTokenKey);
+		return this.http.get<any[]>(`${BASE_URL}/quiz/leaderboard`, {
+			headers: {
+				'Authorization': 'Bearer ' + userToken
+			}
+		});
+	}
+
 	// get all quizes
 	getQuizes(skip, limit): Observable<any[]> {
 		const userToken = localStorage.getItem(environment.authTokenKey);

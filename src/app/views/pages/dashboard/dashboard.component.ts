@@ -11,6 +11,7 @@ import { UserService } from '../../../core/users';
 import { AssetsService } from '../../../core/assets';
 import { AuthService } from '../../../core/auth';
 import { ComputationsService } from '../../../core/computations';
+import { QuizesService } from '../../../core/quizes';
 
 @Component({
 	selector: 'kt-dashboard',
@@ -28,11 +29,13 @@ export class DashboardComponent implements OnInit {
 	maturityAverage = '...';
 	usersCount = '...';
 	staffsCount = '...';
+	leaders;
 	constructor(
 		private auth: AuthService,
 		private usersService: UserService,
 		private assetsService: AssetsService,
 		private computationsService: ComputationsService,
+		private quizService: QuizesService,
 		private store: Store<AppState>,
 		private router: Router,
 		private layoutUtilsService: LayoutUtilsService
@@ -53,6 +56,19 @@ export class DashboardComponent implements OnInit {
 		this.getStaffsCount();
 		this.getMaturityScoreAverage();
 		console.clear();
+	}
+
+	getLeaders() {
+		this.loadingSubject.next(true);
+		this.quizService.getLeaders().subscribe(
+			responseData => {
+				this.leaders = responseData['data'];
+				this.loadingSubject.next(false);
+			},
+			error => {
+				console.log('error', error);
+			}
+		);
 	}
 
 	getUsersCount() {

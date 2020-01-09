@@ -26,7 +26,7 @@ export class QuizesListComponent implements OnInit, OnDestroy {
 		this.loadingSubject.next(true);
 		this.quizesService.getQuizesCount().subscribe(
 			countResult => {
-				this.resultsLength = countResult['count'];
+				this.resultsLength = countResult['data'];
 				if (this.resultsLength <= 10) {
 					console.log('not up to 10', this.resultsLength);
 					this.disableNext = true;
@@ -56,7 +56,7 @@ export class QuizesListComponent implements OnInit, OnDestroy {
 		this.loadingSubject.next(true);
 		this.quizesService.getQuizes(skip, limit).subscribe(
 			responseData => {
-				this.quizes = responseData['success'];
+				this.quizes = responseData['data'];
 				this.loadingSubject.next(false);
 				console.log('all quiz returned', this.quizes);
 			},
