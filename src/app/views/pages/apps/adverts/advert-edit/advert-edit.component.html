@@ -32,7 +32,7 @@
 							<label class="label" for="upload">
 								<img src="./assets/media/icons/d-photo.svg" alt="">
 							</label>
-							<input type="file" id="upload" (change)="onFileChange($event, 'image')" accept="image/*">
+							<input type="file" id="upload" (change)="onFileChange($event)" accept="image/*">
 							<div class="placeholder" *ngIf="!fs">Upload ADs image</div>
 							<div class="placeholder slide-in" *ngIf="fs">{{fs.name}}</div>
 						</div>
