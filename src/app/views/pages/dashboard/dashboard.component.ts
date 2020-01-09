@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 	user$: Observable<User>;
 	quizCount = '...';
 	contactsCount = '...';
-	parablesCount = 0;
+	parablesCount = '...';
 	vendorsCount = '...';
 	advertCount = '...';
 	usersCount = '...';

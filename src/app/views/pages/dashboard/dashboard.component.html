@@ -48,27 +48,25 @@
 </div> -->
 
 <div class="row">
-	<div class="col-lg-6">
+	<div class="col-lg-3">
 		<div class="c one">
 			<div class="val">{{usersCount}}</div>
 			<div class="sub-val">No. of Users</div>
 		</div>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-3">
 		<div class="c two">
 			<div class="val">{{advertCount}}</div>
-			<div class="sub-val">ADs</div>
+			<div class="sub-val">Adverts</div>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-lg-6">
+	<div class="col-lg-3">
 		<div class="c three">
 			<div class="val">{{parablesCount}}</div>
 			<div class="sub-val">Parables</div>
 		</div>
 	</div>
-	<div class="col-lg-6">
+	<div class="col-lg-3">
 		<div class="c four">
 			<div class="val">{{quizCount}}</div>
 			<div class="sub-val">No. of Quiz</div>
@@ -76,14 +74,15 @@
 	</div>
 </div>
 
-<div class="row mt-5">
-	<div class="mx-auto col-lg-10">
-		<div class="claim-body pt-5">
-			<div><h3 class="table-title">Leaderscores</h3></div>
+<kt-portlet>
+	<kt-portlet-header title="Leaderscore board" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+	</kt-portlet-header>
+	<kt-portlet-body>
+		<div class="stage-history">
 			<table class="table-view dashboard">
 				<thead>
 					<tr>
-						<th>POS</th>
+						<th>S/N</th>
 						<th>Username</th>
 						<th>Date</th>
 						<th>Score</th>
@@ -103,5 +102,6 @@
 				<p>No leaderscore found.</p>
 			</div>
 		</div>
-	</div>
-</div>
+
+	</kt-portlet-body>
+</kt-portlet>
