@@ -35,7 +35,7 @@ export class AdvertsListComponent implements OnInit, OnDestroy {
 			countResult => {
 				this.resultsLength = countResult['data'];
 				this.loadingSubject.next(false);
-				if (this.resultsLength <= 10) {
+				if (this.resultsLength <= 20) {
 					console.log('not up to 10', this.resultsLength);
 					this.disableNext = true;
 				} else {

@@ -64,7 +64,7 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit() {
-		this.setBackground = '#2c2e3e';
+		this.setBackground = '#2b2d3e';
 		// this.getOrganizationDetails();
 		this.currentRouteUrl = this.router.url.split(/[?#]/)[0];
 		this.router.events

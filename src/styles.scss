@@ -168,16 +168,12 @@ button[disabled] {
 }
 
 .table-view {
-	font-family: "Roboto", "sans serif";
 	width: 100%;
-
 	thead {
-		background-color: #fafafa;
-		border: 1px solid #d5d6d7;
-		border-radius: 2px 2px 0px 0px;
+		background-color: #f5f3f9;
 		tr {
 			height: 4rem;
-			color: #333;
+			color: #6c6d75;
 			font-size: 0.935rem;
 			th {
 				padding-left: 2.7rem;
@@ -190,13 +186,6 @@ button[disabled] {
 
 		tr {
 			height: 3.75rem;
-			// &:nth-child(even) {
-			// 	background-color: #ffffff;
-			// }
-
-			// &:nth-child(odd) {
-			// 	background-color: #fafafa;
-			// }
 			td {
 				padding: 1.25rem;
 				padding-left: 2.7rem;
@@ -364,8 +353,8 @@ button[disabled] {
 }
 
 .primary-button {
-	background-color: #5d78ff;
-	color: #ffffff;
+	background-color: #9815f4;
+	color: #f3e4ff;
 	font-size: 0.87rem;
 	font-weight: 500;
 	width: 140px;
@@ -374,9 +363,12 @@ button[disabled] {
 	border-radius: 0.2rem;
 	text-align: center;
 	padding-top: 0.5rem;
+	border-radius: 1.5rem;
+	box-shadow: 2px 3px 8px #e6c7ff;
 
 	&:hover {
-		background-color: #4363ff;
+		background-color: #8d03f0;
+		box-shadow: 0px 1px 3px #e6c7ff;
 
 		span {
 			color: #fff;

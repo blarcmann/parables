@@ -4,7 +4,7 @@
 			<!-- <span class="kt-header__topbar-welcome kt-hidden-mobile" *ngIf="showHi">Hi,</span>
 			<span class="kt-header__topbar-username kt-hidden-mobile" *ngIf="showName">{{_user.name|titlecase}}</span> -->
 			<img *ngIf="showAvatar" alt="Pic" src="./assets/media/icons/user.svg">
-			<span *ngIf="showBadge && userDetails" class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{{userDetails.name | firstLetter}}</span>
+			<span *ngIf="showBadge && userDetails" class="kt-badge kt-badge--username colorup kt-badge--lg kt-badge--rounded kt-badge--bold">{{userDetails.name | firstLetter}}</span>
 		</div>
 	</div>
 	<div ngbDropdownMenu class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">

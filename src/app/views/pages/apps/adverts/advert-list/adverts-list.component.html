@@ -28,6 +28,13 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="my-pagination mt-5 mb-4">
+			<div class="pg">Page: <b>{{pageIndex + 1}}</b></div>
+			<div class="btn-grp">
+				<button mat-raised-button (click)="getPrev()" [disabled]="disablePrev">Previous</button>
+				<button mat-raised-button (click)="getNext()" [disabled]="disableNext">Next</button>
+			</div>
+		</div>
 
 	</kt-portlet-body>
 </kt-portlet>

@@ -29,6 +29,17 @@ export class AllParablesComponent implements OnInit, OnDestroy {
 		this.loadingSubject.next(true);
 		let skip = this.pageIndex * this.limit;
 		this.getParables(skip, this.limit);
+		this.parablesService.getParablesCount().subscribe(
+			countResult => {
+				this.resultsLength = countResult['data'];
+				this.loadingSubject.next(false);
+				if (this.resultsLength <= 20) {
+					this.disableNext = true;
+				} else {
+					this.disableNext = false;
+				}
+			}
+		);
 	}
 
 	getParablesCount() {

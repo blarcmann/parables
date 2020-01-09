@@ -27,11 +27,9 @@ export class QuizesListComponent implements OnInit, OnDestroy {
 		this.quizesService.getQuizesCount().subscribe(
 			countResult => {
 				this.resultsLength = countResult['data'];
-				if (this.resultsLength <= 10) {
-					console.log('not up to 10', this.resultsLength);
+				if (this.resultsLength <= 20) {
 					this.disableNext = true;
 				} else {
-					console.log('up to 10', this.resultsLength);
 					this.disableNext = false;
 				}
 			}

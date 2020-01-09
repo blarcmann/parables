@@ -2,7 +2,7 @@
 	::ng-deep {
 		// override default version style
 		.kt-header__topbar {
-			background-color: #2c2e3e;
+			background-color: #FFFFFF;
 			> :last-child:not([role="tooltip"]) {
 				.kt-header__topbar-item {
 					margin-right: 0 !important;
@@ -19,5 +19,5 @@
 	width: max-content;
 	margin: auto 1rem;
 	font-weight: 500;
-	color: #FFF;
+	color: #ad5beb;
 }
