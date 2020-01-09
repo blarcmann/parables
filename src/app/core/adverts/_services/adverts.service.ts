@@ -18,7 +18,7 @@ export class AdvertsService {
 
 	getAllAdverts(skip, limit): Observable<any> {
 		const userToken = localStorage.getItem(environment.authTokenKey);
-		return this.http.get<any>(`${BASE_URL}/ad`, {
+		return this.http.get<any>(`${BASE_URL}/showcase`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
 			},
@@ -31,7 +31,7 @@ export class AdvertsService {
 
 	countAdverts(): Observable<any[]> {
 		const userToken = localStorage.getItem(environment.authTokenKey);
-		return this.http.get<any[]>(`${BASE_URL}/ad/count`, {
+		return this.http.get<any[]>(`${BASE_URL}/showcase/count`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
 			}
@@ -40,7 +40,7 @@ export class AdvertsService {
 
 	getAdvert(id): Observable<any> {
 		const userToken = localStorage.getItem(environment.authTokenKey);
-		return this.http.get<any>(`${BASE_URL}/ad/${id}`, {
+		return this.http.get<any>(`${BASE_URL}/showcase/${id}`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
 			}
@@ -50,7 +50,7 @@ export class AdvertsService {
 	// creates new contacts
 	createAdvert(ad): Observable<any> {
 		const userToken = localStorage.getItem(environment.authTokenKey);
-		return this.http.post<any>(`${BASE_URL}/ad`, ad, {
+		return this.http.post<any>(`${BASE_URL}/showcase`, ad, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
 			}
@@ -59,7 +59,7 @@ export class AdvertsService {
 
 	updateAdvert(ad: any, id) {
 		const userToken = localStorage.getItem(environment.authTokenKey);
-		return this.http.put<any>(`${BASE_URL}/ad/${id}`, ad, {
+		return this.http.put<any>(`${BASE_URL}/showcase/${id}`, ad, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken,
 			}
@@ -68,7 +68,7 @@ export class AdvertsService {
 
 	changeStatus(status, id) {
 		const userToken = localStorage.getItem(environment.authTokenKey);
-		return this.http.put<any>(`${BASE_URL}/ad/status/${id}`, status, {
+		return this.http.put<any>(`${BASE_URL}/showcase/status/${id}`, status, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken,
 			}
@@ -80,7 +80,7 @@ export class AdvertsService {
 	// delete a contact
 	deleteAdvert(id): Observable<any> {
 		const userToken = localStorage.getItem(environment.authTokenKey);
-		return this.http.delete<any>(`${BASE_URL}/ad/${id}`, {
+		return this.http.delete<any>(`${BASE_URL}/showcase/${id}`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
 			}
