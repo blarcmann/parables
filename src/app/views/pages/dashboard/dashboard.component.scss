@@ -48,10 +48,50 @@
 	}
 }
 
-// .player-title {
-//     position: absolute;
-//     left: 0; right: 0;
-//     top: calc(50% + 55px);
-//     text-align: center;
-//     color: #999;
-// }
+.c {
+	// border-radius: 4px;
+	box-shadow: 0 0 13px 0 rgba(82,63,105,.05);
+	background-color: #fff;
+	border-bottom: 1.25rem;
+	padding: 1rem;
+	height: 220px;
+	margin-bottom: 1.75rem;
+	@media(min-width: 992px) {
+		padding: 1.75rem;
+	}
+	&.one{ border-bottom: 4px solid rgb(168, 56, 122);}
+	&.two{ border-bottom: 4px solid rgb(65, 189, 162);}
+	&.three{ border-bottom: 4px solid rgb(238, 139, 59);}
+	&.four{ border-bottom: 4px solid rgb(182, 83, 165);}
+	.val {
+		font-size: 2rem;
+		color: #646c9a;
+		font-weight: 600;
+	}
+	.sub-val {
+		color: #a7abc3;
+		font-size: 1.125rem;
+		margin-top: 0.5rem;
+		font-weight: 400;
+	}
+}
+.table-title {
+	color: #48465b;
+	padding: 1.25rem;
+	font-size: 1.125rem;
+	font-weight: 600;
+	width: 100%;
+	background: #fff;
+    margin-bottom: 0;
+}
+.table-view {
+	&.dashboard {
+		thead {
+			background-color: #FFF;
+			font-weight: 500;
+			tr {
+				color: #48465b;
+			}
+		}
+	}
+}

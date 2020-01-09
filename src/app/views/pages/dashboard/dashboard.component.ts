@@ -8,9 +8,9 @@ import { AppState } from '../../../core/reducers';
 import { Router } from '@angular/router';
 // calender
 import { UserService } from '../../../core/users';
-import { AssetsService } from '../../../core/assets';
+import { ParablesService } from '../../../core/parables';
 import { AuthService } from '../../../core/auth';
-import { ComputationsService } from '../../../core/computations';
+import { AdvertsService } from '../../../core/adverts';
 import { QuizesService } from '../../../core/quizes';
 
 @Component({
@@ -22,19 +22,19 @@ export class DashboardComponent implements OnInit {
 	loading$: Observable<boolean>;
 	loadingSubject = new BehaviorSubject<boolean>(true);
 	user$: Observable<User>;
-	leadsCount = '...';
+	quizCount = '...';
 	contactsCount = '...';
-	assetsCount = 0;
+	parablesCount = 0;
 	vendorsCount = '...';
-	maturityAverage = '...';
+	advertCount = '...';
 	usersCount = '...';
 	staffsCount = '...';
 	leaders;
 	constructor(
 		private auth: AuthService,
 		private usersService: UserService,
-		private assetsService: AssetsService,
-		private computationsService: ComputationsService,
+		private parablesService: ParablesService,
+		private advertsService: AdvertsService,
 		private quizService: QuizesService,
 		private store: Store<AppState>,
 		private router: Router,
@@ -51,10 +51,10 @@ export class DashboardComponent implements OnInit {
 		});
 		this.loading$ = this.loadingSubject.asObservable();
 		this.loadingSubject.next(true);
-		this.initAssets();
+		this.getAdCount();
 		this.getUsersCount();
-		this.getStaffsCount();
-		this.getMaturityScoreAverage();
+		this.getParablesCount();
+		this.getQuizCount();
 		console.clear();
 	}
 
@@ -63,6 +63,19 @@ export class DashboardComponent implements OnInit {
 		this.quizService.getLeaders().subscribe(
 			responseData => {
 				this.leaders = responseData['data'];
+				this.loadingSubject.next(false);
+			},
+			error => {
+				console.log('error', error);
+			}
+		);
+	}
+
+	getQuizCount() {
+		this.loadingSubject.next(true);
+		this.quizService.getQuizesCount().subscribe(
+			responseData => {
+				this.quizCount = responseData['data'];
 				this.loadingSubject.next(false);
 			},
 			error => {
@@ -81,33 +94,24 @@ export class DashboardComponent implements OnInit {
 		);
 	}
 
-	getMaturityScoreAverage() {
+	getAdCount() {
 		this.loadingSubject.next(true);
-		this.computationsService.getScoreAverage().subscribe(
+		this.advertsService.countAdverts().subscribe(
 			countResult => {
-				this.maturityAverage = countResult['average'];
+				this.advertCount = countResult['data'];
 				this.loadingSubject.next(false);
 			}
 		);
 	}
 
-	getStaffsCount() {
-		this.loadingSubject.next(true);
-		this.usersService.getStaffsCount().subscribe(
-			countResult => {
-				this.staffsCount = countResult['data'];
-				this.loadingSubject.next(false);
-			}
-		);
-	}
-	initAssets() {
+	getParablesCount() {
 		this.loadingSubject.next(true);
 		const payload = {
 			id: null
 		};
-		this.assetsService.getAllAssetsCount(payload).subscribe(
+		this.parablesService.getParablesCount().subscribe(
 			assetsCountr => {
-				this.assetsCount = assetsCountr['all_data'];
+				this.parablesCount = assetsCountr['data'];
 				this.loadingSubject.next(false);
 			}
 		);

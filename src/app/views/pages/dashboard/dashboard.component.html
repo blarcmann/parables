@@ -1,6 +1,6 @@
 <kt-portlet-header [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
 </kt-portlet-header>
-<div class="row">
+<!-- <div class="row">
 	<div class="col-xs-12 col-xl-3">
 		<div class="home-card">
 			<div class="card-image one">
@@ -41,22 +41,52 @@
 			</div>
 			<div class="card-data">
 				<div class="stat">223019</div>
-				<div class="title">No. of Users</div>
+				<div class="title">ADs</div>
 			</div>
 		</div>
 	</div>
+</div> -->
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="c one">
+			<div class="val">{{usersCount}}</div>
+			<div class="sub-val">No. of Users</div>
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="c two">
+			<div class="val">{{advertCount}}</div>
+			<div class="sub-val">ADs</div>
+		</div>
+	</div>
 </div>
+<div class="row">
+	<div class="col-lg-6">
+		<div class="c three">
+			<div class="val">{{parablesCount}}</div>
+			<div class="sub-val">Parables</div>
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="c four">
+			<div class="val">{{quizCount}}</div>
+			<div class="sub-val">No. of Quiz</div>
+		</div>
+	</div>
+</div>
+
 <div class="row mt-5">
-	<div class="mx-auto col-lg-4 col-md-6">
+	<div class="mx-auto col-lg-10">
 		<div class="claim-body pt-5">
-			<table class="table-view">
+			<div><h3 class="table-title">Leaderscores</h3></div>
+			<table class="table-view dashboard">
 				<thead>
 					<tr>
 						<th>POS</th>
 						<th>Username</th>
 						<th>Date</th>
 						<th>Score</th>
-						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,9 +95,6 @@
 						<td>{{user.name | titlecase}}</td>
 						<td>{{user.email}}</td>
 						<td>{{user.type ? user.type : 'not available'}}</td>
-						<td>
-							<a routerLink="/cdash/users/user/{{user._id}}" class="view">View</a>
-						</td>
 					</tr>
 				</tbody>
 			</table>

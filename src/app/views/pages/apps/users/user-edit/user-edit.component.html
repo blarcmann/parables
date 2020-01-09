@@ -14,7 +14,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="row" *ngIf="!idParams">
+				<div class="row">
 					<div class="col-lg-12">
 						<div class="form-item">
 							<label class="label">Email address</label>
@@ -22,37 +22,20 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
-					<div class="col-lg-12">
-						<div class="form-item">
-							<label for="title" class="label">User type</label>
-							<select formControlName="type">
-								<option value="">Select user type</option>
-								<option value="{{type.value}}" *ngFor="let type of userTypes;">
-									{{type.label}}
-								</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="form-item">
-							<label for="title" class="label">User role</label>
-							<select formControlName="role">
-								<option value="">Select user's role</option>
-								<option value="{{role._id}}" *ngFor="let role of roles;">
-									{{role.name}}
-								</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row" *ngIf="!idParams">
 					<div class="col-lg-12">
 						<div class="form-item">
 							<label class="label">Password</label>
 							<input type="password" placeholder="Enter user's password"  autofill="false" formControlName="password">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-item">
+							<label class="label">Confirm password</label>
+							<input type="password" placeholder="Confirm user's password"  autofill="false" formControlName="confirm_password">
 						</div>
 					</div>
 				</div>

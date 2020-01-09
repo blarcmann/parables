@@ -1,14 +1,6 @@
 <kt-portlet>
 	<kt-portlet-header [title]="pageTitle|titlecase" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
 		<ng-container ktPortletTools>
-			<div class="details-action edit text-center" routerLink="/cdash/users/manage/{{ userId }}">
-				<img src="./assets/media/icons/details-edit.svg" alt="">
-				<span>Edit</span>
-			</div>
-			<div class="details-action approve text-center" routerLink="/cdash/users/managepassword/{{ userId }}">
-				<img src="./assets/media/icons/details-approve.svg" alt="">
-				<span>Change password</span>
-			</div>
 		</ng-container>
 	</kt-portlet-header>
 	<kt-portlet-body>
@@ -32,15 +24,9 @@
 					</tr>
 					<tr class="each-data" *ngIf="userDetails.name">
 						<td class="label">User type</td>
-						<td class="value">{{ userDetails.type | titlecase }}</td>
-					</tr>
-					<tr class="each-data" *ngIf="userDetails.role">
-						<td class="label">Role</td>
-						<td class="value">{{ roleName | titlecase }}</td>
-					</tr>
-					<tr class="each-data" *ngIf="userDetails.role">
-						<td class="label">Permissions</td>
-						<td class="value"><span class="spacings" *ngFor="let permisson of rolePerm">{{replaceUnderscore(permisson)}}, </span></td>
+						<td class="value status">
+							<span class="convertedToContact">{{ userDetails.type | titlecase }}</span>
+						</td>
 					</tr>
 				</table>
 			</div>

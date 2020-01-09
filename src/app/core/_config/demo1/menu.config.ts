@@ -35,6 +35,13 @@ export class MenuConfig {
 					root: true,
 					bullet: 'dot',
 					icon: 'flaticon2-delivery-package',
+				},
+				{
+					title: 'Users',
+					page: 'users',
+					root: true,
+					bullet: 'dot',
+					icon: 'flaticon-users-1',
 				}
 				// {
 				// 	title: 'Quiz',
