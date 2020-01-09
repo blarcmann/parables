@@ -54,6 +54,7 @@ export class InputTokenComponent implements OnInit, OnDestroy {
 		this.initResetForm();
 		this.resetForm.value.token = '';
 		this.resetForm.value.password = '';
+		this.resetForm.value.confirm_password = '';
 	}
 
 	/**
@@ -72,7 +73,8 @@ export class InputTokenComponent implements OnInit, OnDestroy {
 	initResetForm() {
 		this.resetForm = this.fb.group({
 			token: ['', Validators.required],
-			password: ['', Validators.required]
+			password: ['', Validators.required],
+			confirm_password: ['', Validators.required]
 		});
 	}
 
@@ -80,6 +82,9 @@ export class InputTokenComponent implements OnInit, OnDestroy {
 	 * Form Submit
 	 */
 	submit() {
+		if (this.resetForm.get('confirm_password').value !== this.resetForm.get('password').value) {
+			return this.authNoticeService.setNotice('Passwords does not match', 'warning');
+		}
 		const controls = this.resetForm.controls;
 		/** check form */
 		if (this.resetForm.invalid) {
@@ -99,7 +104,7 @@ export class InputTokenComponent implements OnInit, OnDestroy {
 		let payload = {
 			email: email,
 			password: password,
-			token: token
+			code: token
 		};
 		this.authService.confirmTokenLogin(payload).subscribe(
 			response => {
@@ -107,7 +112,7 @@ export class InputTokenComponent implements OnInit, OnDestroy {
 					this.authNoticeService.setNotice(successMsg, 'success');
 					this.router.navigateByUrl('/auth/login');
 					this.loading = false;
-				} else  {
+				} else {
 					this.authNoticeService.setNotice(errorMsg, 'danger');
 					this.loading = false;
 				}

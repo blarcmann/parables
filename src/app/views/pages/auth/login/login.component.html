@@ -45,10 +45,11 @@
 					</div>
 				</div>
 				<div class="kt-login__actions central-btn">
+					<a routerLink="/auth/forgot-password" class="d-block block mr-auto">Forgot password?</a>
 					<button (click)="submit()"
-						[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}"
-						id="kt_login_signin_submit"
-						class="btn btn-primary btn-elevate kt-login__btn-primary">Login</button>
+					[ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}"
+					id="kt_login_signin_submit"
+					class="btn btn-primary btn-md btn-elevate kt-login__btn-primary">Login</button>
 				</div>
 			</form>
 		</div>

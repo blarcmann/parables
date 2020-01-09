@@ -98,7 +98,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 		const errorMsg = 'Some error Occured, Please re-confirm your email';
 		const wrongEmail = 'Email is not found';
 		localStorage.setItem('tokenEmail', email);
-		this.authService.sendPasswordToken(email).subscribe(
+		let payload = {email};
+		this.authService.forgotPassword(payload).subscribe(
 			response => {
 				this.authNoticeService.setNotice(successMsg, 'success');
 				this.router.navigateByUrl('/auth/add-token');

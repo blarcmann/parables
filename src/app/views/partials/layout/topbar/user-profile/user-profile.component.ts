@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit {
 	showName = true;
 	passwordDetails = {};
 	userDetails;
-	idParams = localStorage.getItem('loginId');
+	idParams = localStorage.getItem('userId');
 
 
 	/**
@@ -70,8 +70,7 @@ export class UserProfileComponent implements OnInit {
 	 */
 	logout() {
 		localStorage.setItem('userToken', '');
-		localStorage.setItem('loginId', '');
-		localStorage.setItem('loginData', '');
+		localStorage.setItem('userId', '');
 		return this.router.navigate(['/auth/login']);
 	}
 

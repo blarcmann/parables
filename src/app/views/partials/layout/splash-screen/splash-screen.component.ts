@@ -43,7 +43,7 @@ export class SplashScreenComponent implements OnInit {
 		const loaderConfig = this.layoutConfigService.getConfig('loader');
 		this.loaderLogo = objectPath.get(loaderConfig, 'logo');
 		this.loaderType = objectPath.get(loaderConfig, 'type');
-		this.loaderMessage = objectPath.get(loaderConfig, 'message');
+		this.loaderMessage = 'Please wait...';
 
 		this.splashScreenService.init(this.splashScreen);
 	}

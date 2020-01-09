@@ -75,6 +75,9 @@ export class AuthService {
 		);
 	}
 
+	forgotPassword(user): Observable<any> {
+		return this.http.post<User>(`${BASE_URL}/user/forgot`, user);
+	}
     /*
      * Submit forgot password request
      *
@@ -100,7 +103,7 @@ export class AuthService {
 		const userToken = localStorage.getItem(environment.authTokenKey);
 		const httpHeaders = new HttpHeaders();
 		httpHeaders.set('Authorization', 'Bearer ' + userToken);
-		return this.http.put<User>(`${BASE_URL}/auth/user/password`, tokenDetais);
+		return this.http.put<User>(`${BASE_URL}/user/change_password/token`, tokenDetais);
 	}
 
 
