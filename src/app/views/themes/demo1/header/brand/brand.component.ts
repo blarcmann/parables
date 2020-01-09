@@ -29,7 +29,7 @@ export class BrandComponent implements OnInit, AfterViewInit {
 	 * @param layoutConfigService: LayoutConfigService
 	 * @param htmlClassService: HtmlClassService
 	 */
-	constructor(private layoutConfigService: LayoutConfigService,private location: Location, public htmlClassService: HtmlClassService) {
+	constructor(private layoutConfigService: LayoutConfigService, private location: Location, public htmlClassService: HtmlClassService) {
 	}
 
 	/**
@@ -40,21 +40,9 @@ export class BrandComponent implements OnInit, AfterViewInit {
 	 * On init
 	 */
 	ngOnInit(): void {
-		setTimeout(() => {
-			this.orgDetails = JSON.parse(localStorage.getItem('siteMeta'));
-			if (!JSON.parse(localStorage.getItem('siteMeta'))) {
-				localStorage.setItem('logo', this.brandIcon);
-			} else {
-				this.brandIcon = this.orgDetails.logo;
-			}
-			if (!JSON.parse(localStorage.getItem('siteMeta'))) {
-				localStorage.setItem('orgBg', '#1e1e2d');
-			} else {
-				this.setBackground = this.orgDetails.color;
-			}
-			this.headerLogo = this.layoutConfigService.getLogo();
-			this.headerStickyLogo = this.layoutConfigService.getStickyLogo();
-		}, 20);
+		this.setBackground = '#2c2e3e';
+		this.headerLogo = this.layoutConfigService.getLogo();
+		this.headerStickyLogo = this.layoutConfigService.getStickyLogo();
 	}
 
 	/**

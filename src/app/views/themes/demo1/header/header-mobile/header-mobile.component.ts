@@ -37,17 +37,7 @@ export class HeaderMobileComponent implements OnInit {
 	 * On init
 	 */
 	ngOnInit() {
-		if (!localStorage.getItem('orgLogo')) {
-			localStorage.setItem('orgLogo', this.brandIcon);
-			window.location.reload();
-		} else {
-			this.brandIcon = localStorage.getItem('orgLogo');
-		}
-		if (!localStorage.getItem('orgBg')) {
-			localStorage.setItem('orgBg', '#1e1e2d');
-		} else {
-			this.setBackground = localStorage.getItem('orgBg');
-		}
+		this.setBackground = '#2c2e3e';
 		this.headerLogo = this.layoutConfigService.getLogo();
 		this.asideDisplay = this.layoutConfigService.getConfig('aside.self.display');
 	}
