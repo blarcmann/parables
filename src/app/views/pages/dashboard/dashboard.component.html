@@ -75,7 +75,7 @@
 </div>
 
 <kt-portlet>
-	<kt-portlet-header title="Leaderscore board" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+	<kt-portlet-header title="This week's leaderboard score" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
 	</kt-portlet-header>
 	<kt-portlet-body>
 		<div class="stage-history">
@@ -84,16 +84,18 @@
 					<tr>
 						<th>S/N</th>
 						<th>Username</th>
-						<th>Date</th>
+						<th>Start</th>
+						<th>End</th>
 						<th>Score</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr className="each-row" *ngFor="let user of leaders; let i = index;">
 						<td>{{i+1}}</td>
-						<td>{{user.name | titlecase}}</td>
-						<td>{{user.email}}</td>
-						<td>{{user.type ? user.type : 'not available'}}</td>
+						<td><a routerLink="/para/users/user/{{user.user}}">{{user.username | titlecase}}</a></td>
+						<td>{{user.start | date: 'medium'}}</td>
+						<td>{{user.end | date: 'medium'}}</td>
+						<td>{{user.score ? user.score : '-'}}</td>
 					</tr>
 				</tbody>
 			</table>

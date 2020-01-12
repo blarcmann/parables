@@ -22,6 +22,14 @@
 							<a href="mailto:{{ userDetails.username }}">{{	userDetails.username }}</a>
 						</td>
 					</tr>
+
+					<tr class="each-data" *ngIf="userDetails.tel">
+						<td class="label">Phone number</td>
+						<td class="value">
+							<a href="tel:{{userDetails.tel}}">{{	userDetails.tel }}</a>
+						</td>
+					</tr>
+
 					<tr class="each-data" *ngIf="userDetails.name">
 						<td class="label">User type</td>
 						<td class="value status">

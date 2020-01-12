@@ -17,7 +17,7 @@
 						<th>Clicks</th>
 						<th>Status</th>
 						<th>Image</th>
-						<th>Opens</th>
+						<th>Views</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -25,12 +25,12 @@
 					<tr className="each-row" *ngFor="let ad of adverts">
 						<td>{{(ad.title.length > 43) ? (ad.title | slice:0:33)+'...' : (ad.title)}}</td>
 						<td><a href="{{ad.link}}" target="_blank">{{(ad.link.length > 43) ? (ad.link | slice:0:43)+'...' : (ad.link)}}</a></td>
-						<td>{{ad.opens}}</td>
+						<td>{{ad.clicks}}</td>
 						<td class="status">
 							<span class="leadInitiated">{{(ad.active ? 'active' : 'inactive') | uppercase}}</span>
 						</td>
 						<td><a href="{{ad.image.Location}}" target="_blank">{{(ad.image.Location.length > 43) ? (ad.image.Location | slice:0:43)+'...' : (ad.image.Location)}}</a></td>
-						<td>{{ad.clicks}}</td>
+						<td>{{ad.opens}}</td>
 						<td><a routerLink="/para/adverts/{{ad._id}}" class="view">View</a></td>
 					</tr>
 				</tbody>

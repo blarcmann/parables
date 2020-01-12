@@ -23,7 +23,10 @@
 						<tr className="each-row" *ngFor="let user of users">
 							<td>{{user.name | titlecase}}</td>
 							<td>{{user.email}}</td>
-							<td class="status">
+							<td class="status" *ngIf="user.type === 'admin'">
+								<span class="leadInititated">{{user.type ? user.type : 'not available'}}</span>
+							</td>
+							<td class="status" *ngIf="user.type === 'user'">
 								<span class="convertedToContact">{{user.type ? user.type : 'not available'}}</span>
 							</td>
 							<td>

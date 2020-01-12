@@ -68,14 +68,12 @@ export class QuizesListComponent implements OnInit, OnDestroy {
 		if (((this.pageIndex * 10) + 10) >= this.resultsLength) {
 			this.disableNext = true;
 			console.log('paste total numbers');
-			// return;
 		} else {
 			this.disableNext = false;
 		}
 		if (this.pageIndex === 0) {
 			this.disablePrev = true;
 			console.log('last page');
-			// return;
 		} else {
 			this.disablePrev = false;
 		}

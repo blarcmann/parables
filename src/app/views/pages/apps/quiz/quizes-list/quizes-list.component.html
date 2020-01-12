@@ -17,18 +17,18 @@
 							<th>Score</th>
 							<th>Start</th>
 							<th>end</th>
-							<th></th>
+							<!-- <th></th> -->
 						</tr>
 					</thead>
 					<tbody>
 						<tr className="each-row" *ngFor="let quiz of quizes">
-							<td>{{ quiz.name | titlecase }}</td>
+							<td>{{ quiz.username | titlecase }}</td>
 							<td>{{ quiz.score }}</td>
-							<td>{{ quiz.start | date: 'fullDate' }}</td>
-							<td>{{ quiz.end | date: 'fullDate' }}</td>
-							<td>
+							<td>{{ quiz.start | date: 'medium' }}</td>
+							<td>{{ quiz.end | date: 'medium' }}</td>
+							<!-- <td>
 								<a routerLink="/para/quizes/quiz/{{quiz._id}}" class="view">View</a>
-							</td>
+							</td> -->
 						</tr>
 					</tbody>
 				</table>

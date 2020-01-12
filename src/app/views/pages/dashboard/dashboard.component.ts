@@ -55,12 +55,13 @@ export class DashboardComponent implements OnInit {
 		this.getUsersCount();
 		this.getParablesCount();
 		this.getQuizCount();
+		this.getLeaders();
 		console.clear();
 	}
 
 	getLeaders() {
 		this.loadingSubject.next(true);
-		this.quizService.getLeaders().subscribe(
+		this.quizService.getLeaderscore().subscribe(
 			responseData => {
 				this.leaders = responseData['data'];
 				this.loadingSubject.next(false);

@@ -1,5 +1,5 @@
 <kt-portlet>
-	<kt-portlet-header title="Social media details" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
+	<kt-portlet-header title="Advert details" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
 		<ng-container ktPortletTools>
 			<div class="details-action delete text-center" (click)="onDelete()">
 				<img src="./assets/media/icons/details-delete.svg" alt="">
@@ -38,7 +38,7 @@
 						<td class="value">{{advertDetails.clicks}} times</td>
 					</tr>
 					<tr class="each-data" *ngIf="advertDetails.opens !== null">
-						<td class="label">No. of opens</td>
+						<td class="label">No. of views</td>
 						<td class="value">{{advertDetails.opens}} times</td> 
 					</tr>
 					<tr class="each-data" *ngIf="advertDetails.active !== null">
