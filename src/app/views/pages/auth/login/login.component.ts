@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	 * On init
 	 */
 	ngOnInit(): void {
+		localStorage.clear();
 		this.auth.checkAdmin().subscribe(response => {
 			if (response.status === true && response.admin === true) {
 				return;
@@ -142,6 +143,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 					this.store.dispatch(new Login({ authToken: responseData.user_token }));
 					localStorage.setItem('userToken', responseData.user_token);
 					localStorage.setItem('userId', responseData.user_id);
+					if (responseData.type !== 'admin') {
+						this.loading = false;
+						return this.authNoticeService.setNotice(this.translate.instant('Access denied, only ADMIN accounts are allowed'), 'danger');
+					}
 					this.router.navigateByUrl(this.returnUrl); // Main page
 				} else {
 					this.authNoticeService.setNotice(this.translate.instant('AUTH.VALIDATION.INVALID_LOGIN'), 'danger');
