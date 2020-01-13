@@ -17,7 +17,7 @@ export class QuizesService {
 
 	// creates new quiz
 	createQuiz(quiz): Observable<any> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.post<any>(`${BASE_URL}/quiz`, quiz, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken,
@@ -26,7 +26,7 @@ export class QuizesService {
 	}
 
 	getLeaderscore(): Observable<any> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.get<any>(`${BASE_URL}/quiz/leaderboard`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
@@ -35,7 +35,7 @@ export class QuizesService {
 	}
 
 	getLeaders(): Observable<any[]> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.get<any[]>(`${BASE_URL}/quiz/leaderboard`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
@@ -45,7 +45,7 @@ export class QuizesService {
 
 	// get all quizes
 	getQuizes(skip, limit): Observable<any[]> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.get<any[]>(`${BASE_URL}/quiz`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
@@ -58,7 +58,7 @@ export class QuizesService {
 	}
 
 	getQuizesCount(): Observable<any[]> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.get<any[]>(`${BASE_URL}/quiz/count`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
@@ -68,7 +68,7 @@ export class QuizesService {
 
 
 	getQuiz(id): Observable<any> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.get<any>(`${BASE_URL}/quiz/${id}`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
@@ -78,7 +78,7 @@ export class QuizesService {
 
 	// update a quiz
 	updateQuiz(id, quiz) {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.put<any>(`${BASE_URL}/quiz/${id}`, quiz, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
@@ -88,7 +88,7 @@ export class QuizesService {
 
 	// delete a quiz
 	deleteQuiz(id: string): Observable<any> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.delete<any>(`${BASE_URL}/quiz/${id}`, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken

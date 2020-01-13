@@ -23,7 +23,7 @@ export class AuthService {
 	}
 
 	getUserByToken(): Observable<User> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		return this.http.get<User>(API_USERS_URL, {
 			headers: {
 				'Authorization': 'Bearer ' + userToken
@@ -63,7 +63,7 @@ export class AuthService {
 	}
 
 	changePassword(user): Observable<any> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		const httpHeaders = new HttpHeaders();
 		httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.post<User>(`${BASE_URL}/auth/user/changePass`, user, {
@@ -93,14 +93,14 @@ export class AuthService {
 
 	// /v1/auth/forgot/forgot-add?email="email"
 	sendPasswordToken(email): Observable<any> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		const httpHeaders = new HttpHeaders();
 		httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.get<User>(`${BASE_URL}/auth/forgot/forgot-add?email=${email}`);
 	}
 
 	confirmTokenLogin(tokenDetais): Observable<any> {
-		const userToken = localStorage.getItem(environment.authTokenKey);
+		const userToken = localStorage.getItem('userToken');
 		const httpHeaders = new HttpHeaders();
 		httpHeaders.set('Authorization', 'Bearer ' + userToken);
 		return this.http.put<User>(`${BASE_URL}/user/change_password/token`, tokenDetais);

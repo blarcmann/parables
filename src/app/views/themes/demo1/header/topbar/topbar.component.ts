@@ -14,7 +14,8 @@ export class TopbarComponent implements OnInit {
 		private usersService: UserService
 	) { }
 	ngOnInit() {
-		this.userId = localStorage.getItem('loginId');
+		this.userDetails = JSON.parse(localStorage.getItem('userDetails'));
+		this.userId = localStorage.getItem('userId');
 		this.getUserDetails(this.userId);
 	}
 	getUserDetails(id) {

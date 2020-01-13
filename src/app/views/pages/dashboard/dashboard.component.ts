@@ -42,8 +42,12 @@ export class DashboardComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		console.log('got to admin......');
 		this.auth.checkAdmin().subscribe(response => {
-			if (response.status !== true && !localStorage.getItem('userToken')) {
+			console.log('admin API called');
+			if (response.status === true && localStorage.getItem('userToken')) {
+				return;
+			} else {
 				this.router.navigate(['/auth/login']);
 			}
 		});
@@ -54,7 +58,6 @@ export class DashboardComponent implements OnInit {
 		this.getParablesCount();
 		this.getQuizCount();
 		this.getLeaders();
-		console.clear();
 	}
 
 	getLeaders() {

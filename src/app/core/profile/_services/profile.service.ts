@@ -14,6 +14,6 @@ const BASE_URL = environment.BASE_URL;
 
 @Injectable()
 export class ProfileService {
-	userToken = localStorage.getItem(environment.authTokenKey);
+	userToken = localStorage.getItem('userToken');
 	constructor(private http: HttpClient, private httpUtils: HttpUtilsService) { }
 }

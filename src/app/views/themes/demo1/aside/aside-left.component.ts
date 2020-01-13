@@ -84,24 +84,6 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	// getOrganizationDetails() {
-	// 	this.organizationsService.getOrganization().subscribe(
-	// 		singleOrganization => {
-	// 			this.organizationDetails = singleOrganization['data'];
-	// 			console.log('org details sssssidemenu aside', this.organizationDetails);
-	// 			if (this.organizationDetails && this.organizationDetails.color) {
-	// 				this.setBackground = this.organizationDetails.color;
-	// 			}
-	// 			if (this.organizationDetails && this.organizationDetails.logo) {
-	// 				localStorage.setItem('siteMeta', JSON.stringify(this.organizationDetails));
-	// 			}
-	// 		},
-	// 		error => {
-	// 			console.log('error occured', error);
-	// 		}
-	// 	);
-	// }
-
 	isMenuItemIsActive(item): boolean {
 		if (item.submenu) {
 			return this.isMenuRootItemIsActive(item);
