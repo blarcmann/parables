@@ -42,10 +42,8 @@ export class DashboardComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.auth.checkOrganization().subscribe(response => {
-			if (response.status === true && localStorage.getItem('userToken')) {
-				return;
-			} else {
+		this.auth.checkAdmin().subscribe(response => {
+			if (response.status !== true && !localStorage.getItem('userToken')) {
 				this.router.navigate(['/auth/login']);
 			}
 		});
