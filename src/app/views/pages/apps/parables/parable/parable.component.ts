@@ -37,7 +37,7 @@ export class ParableComponent implements OnInit, OnDestroy {
 		private activatedRoute: ActivatedRoute,
 		private parablesService: ParablesService,
 		private _location: Location,
-		public sanitizer:DomSanitizer,
+		public sanitizer: DomSanitizer,
 		private router: Router) { }
 
 	ngOnInit() {

@@ -130,6 +130,10 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	}
 
 	updateParable() {
+		if (this.parablesForm.get('title').value === '' || this.parablesForm.get('translation').value === '' || !this.fSelected) {
+			const message = `Parable, translation and image are compulsory`;
+			return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
+		}
 		this.loadingSubject.next(true);
 		let payload = new FormData();
 		payload.append('title', this.parablesForm.get('title').value);
@@ -159,6 +163,10 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	}
 
 	addParable() {
+		if (this.parablesForm.get('title').value === '' || this.parablesForm.get('translation').value === '' || !this.fSelected) {
+			const message = `Parable, translation and image are compulsory`;
+			return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
+		}
 		this.loadingSubject.next(true);
 		let payload = new FormData();
 		payload.append('title', this.parablesForm.get('title').value);
