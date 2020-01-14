@@ -8,7 +8,7 @@
 					<div class="col-lg-12">
 						<div class="form-item">
 							<label class="label">Parable's title</label>
-							<input type="text" placeholder="Enter parables name" formControlName="title">
+							<textarea rows="4" type="text" placeholder="Enter indigenous parable" formControlName="title"></textarea>
 						</div>
 					</div>
 				</div>
@@ -16,7 +16,7 @@
 					<div class="col-lg-12">
 						<div class="form-item">
 							<label class="label">Translation</label>
-							<input type="text" placeholder="Enter parables's translation" formControlName="translation">
+							<textarea rows="5" type="text" placeholder="Enter parables's translation" formControlName="translation"></textarea>
 						</div>
 					</div>
 				</div>
@@ -27,8 +27,17 @@
 								<img src="./assets/media/icons/sound-bars.svg" alt="">
 							</label>
 							<input type="file" id="upload-audio" (change)="onFileChange($event, 'audio')" accept=".m4a,audio/mp3,audio/*;capture=microphone">
-							<div class="placeholder" *ngIf="!fAudio">Upload audio</div>
+							<div class="placeholder" *ngIf="!fAudio && !idParams">Upload audio</div>
+							<div class="placeholder" *ngIf="!fAudio && idParams">Replace audio</div>
 							<div class="placeholder slide-in" *ngIf="fAudio">{{fAudio.name}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-item">
+							<label class="label">Video (youtube)</label>
+							<input type="text" placeholder="https://www.youtube.com/embed/X8uwKfe3E6I" formControlName="youtube">
 						</div>
 					</div>
 				</div>
@@ -39,7 +48,8 @@
 								<img src="./assets/media/icons/d-photo.svg" alt="">
 							</label>
 							<input type="file" id="upload" (change)="onFileChange($event, 'image')" accept="image/*">
-							<div class="placeholder" *ngIf="!fileName">Upload image</div>
+							<div class="placeholder" *ngIf="!fileName && !idParams">Upload image</div>
+							<div class="placeholder" *ngIf="!fileName && idParams">Replace image</div>
 							<div class="placeholder slide-in" *ngIf="fileName">{{fileName}}</div>
 						</div>
 					</div>

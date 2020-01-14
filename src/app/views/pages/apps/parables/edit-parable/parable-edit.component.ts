@@ -84,13 +84,15 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 		this.parablesForm = this.fb.group({
 			title: ['', Validators.required],
 			translation: ['', Validators.required],
+			youtube: ['']
 		});
 	}
 
 	initparableForm(parable: any = {}) {
 		this.parablesForm = this.fb.group({
 			title: [parable.title || '', Validators.required],
-			translation: [parable.translation || '', Validators.required]
+			translation: [parable.translation || '', Validators.required],
+			youtube: [parable.youtube || '']
 		});
 	}
 
@@ -132,6 +134,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 		let payload = new FormData();
 		payload.append('title', this.parablesForm.get('title').value);
 		payload.append('translation', this.parablesForm.get('translation').value);
+		payload.append('youtube', this.parablesForm.get('youtube').value);
 		if (this.fSelected) {
 			payload.append('image', this.fSelected, this.fSelected.name);
 		}
@@ -142,7 +145,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 			data => {
 				console.log('success reponse', data);
 				this.loadingSubject.next(false);
-				const message = `parable has been Successfully Updated`;
+				const message = `Parable has been Successfully Updated`;
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 				this.router.navigate(['/para/parables']);
 			},
@@ -160,6 +163,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 		let payload = new FormData();
 		payload.append('title', this.parablesForm.get('title').value);
 		payload.append('translation', this.parablesForm.get('translation').value);
+		payload.append('youtube', this.parablesForm.get('youtube').value);
 		if (this.fSelected) {
 			payload.append('image', this.fSelected, this.fSelected.name);
 		}
@@ -177,7 +181,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 				this.loadingSubject.next(false);
 				console.log('Error response', error);
 				const title = 'Please Retry';
-				const message = 'Sorry, Temporary Error Occured';
+				const message = 'Sorry, temporary error occured';
 				this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 			});
 	}
@@ -194,10 +198,18 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	onFileChange(event, type) {
 		if (event.target.files.length > 0) {
 			if (type === 'image') {
+				if (event.target.files[0].size > 1048576) {
+					const message = 'File too large. Image file should not be more than 1MB.';
+					return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
+				}
 				this.fSelected = event.target.files[0];
 				this.fileName = event.target.files[0].name;
 			}
 			if (type === 'audio') {
+				if (event.target.files[0].size > 2097152) {
+					const message = 'File too large. Audio file should not be more than 2MB.';
+					return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
+				}
 				this.fAudio = event.target.files[0];
 				this.fAudioName = event.target.files[0].name;
 			}

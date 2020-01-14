@@ -6,6 +6,8 @@ import { ParablesService } from '../../../../../core/parables';
 import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl,} from '@angular/platform-browser';
 
 @Component({
 	// tslint:disable-next-line:component-selector
@@ -28,12 +30,14 @@ export class ParableComponent implements OnInit, OnDestroy {
 	turnoverForm: FormGroup;
 	turnover;
 	idParams;
+	url: SafeResourceUrl;
 	constructor(
 		private layoutUtilsService: LayoutUtilsService,
 		private fb: FormBuilder,
 		private activatedRoute: ActivatedRoute,
 		private parablesService: ParablesService,
 		private _location: Location,
+		public sanitizer:DomSanitizer,
 		private router: Router) { }
 
 	ngOnInit() {
@@ -48,6 +52,7 @@ export class ParableComponent implements OnInit, OnDestroy {
 		this.parablesService.getParable(this.idParams).subscribe(parableDetails => {
 			console.log('parable details full', parableDetails);
 			this.parableDetails = parableDetails['data'];
+			this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.parableDetails.youtube);
 			this.loadingSubject.next(false);
 		});
 	}
@@ -84,4 +89,13 @@ export class ParableComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() { }
+}
+
+
+@Pipe({ name: 'safe' })
+export class SafePipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 }

@@ -46,6 +46,11 @@
 					</tr>
 				</table>
 			</div>
+			<div class="video-embed" *ngIf="parableDetails.youtube">
+				<div class="title">Video</div>
+				<iframe [src]="url" width="560" height="315" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
 			<div *ngIf="!parableDetails" class="mt-5 please-data text-center">Please Wait...</div>
 		</div>
 	</kt-portlet-body>

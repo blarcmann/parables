@@ -61,6 +61,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 			name: ['', Validators.required],
 			email: ['', Validators.required],
 			password: ['', Validators.required],
+			gender: ['', Validators.required],
 			confirm_password: ['', Validators.required],
 		});
 	}
@@ -103,6 +104,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		const payload = {
 			name: this.userForm.value.name,
 			email: this.userForm.value.email,
+			gender: this.userForm.value.gender,
 			type: 'admin',
 			password: this.userForm.value.password,
 		};

@@ -15,7 +15,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ParablesComponent } from './parables.component';
 import { AllParablesComponent } from './parables/parables.component';
 import { ParableEditComponent } from './edit-parable/parable-edit.component';
-import { ParableComponent } from './parable/parable.component';
+import { ParableComponent, SafePipe } from './parable/parable.component';
 
 // Core => utils
 import { HttpUtilsService,
@@ -150,7 +150,8 @@ const routes: Routes = [
 		ParablesComponent,
 		AllParablesComponent,
 		ParableEditComponent,
-		ParableComponent
+		ParableComponent,
+		SafePipe
 	]
 })
 export class ParablesModule { }

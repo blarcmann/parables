@@ -185,3 +185,18 @@ table {
       }
     }
   }
+
+  .video-embed {
+    margin-left: 1rem;
+    @media(min-width: 992px) {
+      margin: auto;
+      margin-left: 15%;
+      margin-top: 2rem;
+      max-width: 470px;
+    }
+    .title {
+      color: #97979d;
+      font-weight: 500;
+      margin-bottom: 0.935rem;
+    }
+  }
