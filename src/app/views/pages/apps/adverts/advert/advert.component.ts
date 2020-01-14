@@ -68,7 +68,7 @@ export class AdvertComponent implements OnInit {
 			return this.router.navigate(['/cdash/adverts/adverts']);
 		}
 		const _title: string = 'Delete Advert';
-		const _description: string = 'Are you sure to permanently delete the ADs?';
+		const _description: string = 'Are you sure to permanently delete the advert?';
 		const _waitDesciption: string = 'Advert will be deleted...';
 		const _deleteMessage = `Advert has been deleted`;
 		const _errorDelete = 'Seems and Error Occured, Retry';
