@@ -130,7 +130,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	}
 
 	updateParable() {
-		if (this.parablesForm.get('title').value === '' || this.parablesForm.get('translation').value === '' || !this.fSelected) {
+		if (this.parablesForm.get('title').value === '' || this.parablesForm.get('translation').value === '') {
 			const message = `Parable, translation and image are compulsory`;
 			return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 		}
