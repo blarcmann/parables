@@ -209,17 +209,19 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 				if (event.target.files[0].size > 1048576) {
 					const message = 'File too large. Image file should not be more than 1MB.';
 					return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
+				} else {
+					this.fSelected = event.target.files[0];
+					this.fileName = event.target.files[0].name;
 				}
-				this.fSelected = event.target.files[0];
-				this.fileName = event.target.files[0].name;
 			}
 			if (type === 'audio') {
 				if (event.target.files[0].size > 2097152) {
 					const message = 'File too large. Audio file should not be more than 2MB.';
 					return this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
+				} else {
+					this.fAudio = event.target.files[0];
+					this.fAudioName = event.target.files[0].name;
 				}
-				this.fAudio = event.target.files[0];
-				this.fAudioName = event.target.files[0].name;
 			}
 		}
 	}
