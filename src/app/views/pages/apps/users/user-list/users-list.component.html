@@ -15,6 +15,7 @@
 						<tr>
 							<th>Name</th>
 							<th>Email</th>
+							<th>Status</th>
 							<th>Type</th>
 							<th></th>
 						</tr>
@@ -23,6 +24,12 @@
 						<tr className="each-row" *ngFor="let user of users">
 							<td>{{user.name | titlecase}}</td>
 							<td>{{user.email}}</td>
+							<td class="status" *ngIf="user.status === true">
+								<span class="convertedToContact">Active</span>
+							</td>
+							<td class="status" *ngIf="user.status !== true">
+								<span class="sentMOUProposal">Suspended</span>
+							</td>
 							<td class="status" *ngIf="user.type === 'admin'">
 								<span class="leadInitiated">{{user.type ? user.type : 'not available'}}</span>
 							</td>
