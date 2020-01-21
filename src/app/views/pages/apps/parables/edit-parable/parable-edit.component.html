@@ -26,7 +26,7 @@
 							<label class="label" for="upload-audio">
 								<img src="./assets/media/icons/sound-bars.svg" alt="">
 							</label>
-							<input type="file" id="upload-audio" (change)="onFileChange($event, 'audio')" accept=".m4a,audio/mp3,audio/*;capture=microphone">
+							<input type="file" id="upload-audio" (change)="onFileChange($event, 'audio')" accept=".m4a, .mp4, .mpg, .mpeg, .ogg, .wmv, audio/mp3,audio/*;capture=microphone">
 							<div class="placeholder" *ngIf="!fAudio && !idParams">Upload audio (not more than 2mb)</div>
 							<div class="placeholder" *ngIf="!fAudio && idParams">Replace audio (not more than 2mb)</div>
 							<div class="placeholder slide-in" *ngIf="fAudio">{{fAudio.name}}</div>

@@ -138,6 +138,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.subscribe(response => {
 				console.log(response);
 				const responseData = response['data'];
+				if (responseData.status === false) {
+					this.loading = false;
+					return this.authNoticeService.setNotice(this.translate.instant('This account have been suspended'), 'danger');
+				}
 				if (responseData.user_token) {
 					this.store.dispatch(new Login({ authToken: responseData.user_token }));
 					console.log('dispatched in login');

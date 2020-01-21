@@ -1,6 +1,14 @@
 <kt-portlet>
 	<kt-portlet-header [title]="pageTitle|titlecase" [class]="'kt-portlet__head--lg'" [viewLoading$]="loading$">
 		<ng-container ktPortletTools>
+			<a class="details-action options kt-margin-r-10" matTooltip="user status" *ngIf="userDetails" [matMenuTriggerFor]="menu">
+				<i class="la la-cog"></i>
+				&nbsp;
+				<span class="kt-hidden-mobile">User status</span>
+			</a>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item (click)="changeStatus()">{{userDetails && userDetails.status ? 'Suspend user' : 'Activate user'}}</button>
+			</mat-menu>
 		</ng-container>
 	</kt-portlet-header>
 	<kt-portlet-body>
@@ -22,7 +30,12 @@
 							<a href="mailto:{{ userDetails.username }}">{{	userDetails.username }}</a>
 						</td>
 					</tr>
-
+					<tr class="each-data" *ngIf="userDetails.status !== null">
+						<td class="label">User status</td>
+						<td class="value status">
+							<span class="scheduledMeeting">{{(userDetails.status ? 'Active' : 'Suspended') | uppercase}}</span>
+						</td> 
+					</tr>
 					<tr class="each-data" *ngIf="userDetails.tel">
 						<td class="label">Phone number</td>
 						<td class="value">

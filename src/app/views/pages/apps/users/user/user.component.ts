@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../../core/users';
 import { RolesService } from '../../../../../core/roles';
-import { LayoutUtilsService } from '../../../../../core/_base/crud';
+import { LayoutUtilsService, MessageType } from '../../../../../core/_base/crud';
 import { Location } from '@angular/common';
 
 
@@ -50,8 +50,40 @@ export class UserComponent implements OnInit {
 		);
 	}
 
+	getUserDetails() {
+		this.usersService.getUserById(this.userId).subscribe(
+			singleUser => {
+				this.userDetails = singleUser['data'];
+				this.getAllRoles();
+				this.pageTitle = `${this.userDetails.name}`;
+				this.loadingSubject.next(false);
+			},
+			error => {
+				console.log('error occured', error);
+				this.loadingSubject.next(false);
+			}
+		);
+	}
+
 	replaceUnderscore(string) {
 		return string.replace('_', ' ');
+	}
+
+	changeStatus() {
+		let status  = false;
+		if (this.userDetails.status === true) {
+			status = false;
+		} else {
+			status = true;
+		}
+		const payload = {status};
+		this.usersService.changeStatus(payload, this.userId).subscribe(
+			response => {
+				this.getUserDetails();
+				this.layoutUtilsService.showActionNotification('Successful', MessageType.Update);
+				this.loadingSubject.next(false);
+			}
+		);
 	}
 
 

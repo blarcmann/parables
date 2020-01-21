@@ -44,7 +44,6 @@ export class DashboardComponent implements OnInit {
 	ngOnInit() {
 		console.log('got to admin......');
 		this.auth.checkAdmin().subscribe(response => {
-			console.log('admin API called');
 			if (response.status === true && localStorage.getItem('userToken')) {
 				return;
 			} else {

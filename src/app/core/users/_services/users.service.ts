@@ -113,6 +113,16 @@ export class UserService {
 		});
 	}
 
+	changeStatus(status, id) {
+		const userToken = localStorage.getItem('userToken');
+		return this.http.put<any>(`${BASE_URL}/user/status/${id}`, status, {
+			headers: {
+				'Authorization': 'Bearer ' + userToken,
+			}
+		});
+	}
+
+
 
 	// creates new contacts
 	createUser(User): Observable<any> {
