@@ -124,14 +124,16 @@ export class AdvertEditComponent implements OnInit, OnDestroy {
 
 	updateAdvert() {
 		this.loadingSubject.next(true);
-		if (this.link === '' || this.title === '' || !this.fs) {
-			const message = 'All fields are compulsory';
+		if (this.link === '' || this.title === '') {
+			const message = 'Title and link are compulsory';
 			this.layoutUtilsService.showActionNotification(message, MessageType.Create, 10000, true, true);
 		}
 		let payload = new FormData();
 		payload.append('title', this.title);
 		payload.append('link', this.link);
-		payload.append('image', this.fs, this.fs.name);
+		if (this.fs) {
+			payload.append('image', this.fs, this.fs.name);
+		}
 		this.advertsService.updateAdvert(payload, this.idParams).subscribe(
 			data => {
 				console.log('success reponse', data);
