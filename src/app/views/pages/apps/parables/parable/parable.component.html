@@ -27,7 +27,7 @@
 					</tr>
 					<tr class="each-data" *ngIf="parableDetails.translation">
 						<td class="label">Translation</td>
-						<td class="value">{{ parableDetails.translation }}</td>
+						<td class="value" [innerHTML]="parableDetails.translation"></td>
 					</tr>
 					<tr class="each-data" *ngIf="parableDetails.file">
 						<td class="label">Image</td>

@@ -46,6 +46,7 @@ export class ParableEditComponent implements OnInit, OnDestroy {
 	fAudioName;
 	fileName;
 	formError = 'Oops! Change a few things up and try submitting again.';
+	ckeditorContent = '';
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private router: Router,

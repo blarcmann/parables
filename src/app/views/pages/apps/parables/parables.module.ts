@@ -8,8 +8,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ModuleGuard } from '../../../../core/auth';
 // UI
 import { PartialsModule } from '../../../partials/partials.module';
-
+import { CKEditorModule } from 'ng2-ckeditor';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 // Components
 import { ParablesComponent } from './parables.component';
@@ -116,7 +117,8 @@ const routes: Routes = [
 		MatSnackBarModule,
 		MatTooltipModule,
 		MatStepperModule,
-		InfiniteScrollModule
+		InfiniteScrollModule,
+		CKEditorModule
 	],
 	providers: [
 		ModuleGuard,
